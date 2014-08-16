@@ -1,0 +1,24 @@
+<!doctype html>
+<html ng-app="weblinks">
+	<head>
+		<meta charset="UTF-8"> 
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="weblinks.css" />
+		<script type="text/javascript" src="angular.min.js"></script>
+		<script type="text/javascript" src="weblinks.js"></script>
+	</head>
+	<body ng-controller="WebLinksController as linkCtrl">
+		<section ng-repeat="linkGroup in linkCtrl.groups">
+		<h3>{{linkGroup.name}}</h3>
+		<div ng-repeat="link in linkGroup.links">
+			<a href="{{link.url}}">{{link.title}}</a>
+			<div style="display:inline-block" ng-show="{{link.comment.length > 0}}">-- {{link.comment}}</div>
+		</div>
+		</section>
+	</body>
+</html>
+
+<!--  NEXT:  Create a custom directive <display-weblinks> that does all of this. 
+		AFTER:  Create a new custom directive to add a new link. This would update the JSON somehow so I don't have to edit it automatically.
+		FINALLY: Add a button that would show delete icons for existing links. Deleting would set a 'deleted' bit on the JSON, then save. 
+-->
