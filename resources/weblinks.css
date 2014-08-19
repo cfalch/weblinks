@@ -1,0 +1,12 @@
+body {
+	margin:15px;
+}
+.addLink {
+	width: 16px;
+	height:16px;
+	display:inline-block;
+	background:transparent url('plus_16.png') center top no-repeat;
+}
+.addLink.hover {
+	background:transparent url('tick_16.png') center top no-repeat;
+}

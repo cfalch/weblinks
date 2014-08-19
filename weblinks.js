@@ -11,6 +11,21 @@
 				$http.get('urls.json').success(function(data) {
 					linksApp.groups = data;
 				});
+				this.editGroup = "";
+				this.isEditing = function(groupName) {
+					console.log("isEditing(" + groupName + ")");
+					return groupName == this.editGroup;
+				};
+				this.setEditing = function(groupName) {
+					console.log("setEditing(" + groupName + ")");
+					this.editGroup = groupName;
+				};
+				this.linkToAdd = {};
+				this.addLink = function(group) {
+					group.links.push(this.linkToAdd);
+					this.linkToAdd = {};
+					this.setEditing('');
+				};
 			}], controllerAs:'linkCtrl'
 		};
 	});
