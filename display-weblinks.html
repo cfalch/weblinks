@@ -1,0 +1,7 @@
+<section ng-repeat="linkGroup in linkCtrl.groups">
+<h3>{{linkGroup.name}}</h3>
+<div ng-repeat="link in linkGroup.links">
+	<a href="{{link.url}}">{{link.title}}</a>
+	<div style="display:inline-block" ng-show="{{link.comment.length > 0}}">-- {{link.comment}}</div>
+</div>
+</section>
