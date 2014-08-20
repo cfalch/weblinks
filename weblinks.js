@@ -13,16 +13,21 @@
 				});
 				this.editGroup = "";
 				this.isEditing = function(groupName) {
-					console.log("isEditing(" + groupName + ")");
 					return groupName == this.editGroup;
 				};
 				this.setEditing = function(groupName) {
-					console.log("setEditing(" + groupName + ")");
 					this.editGroup = groupName;
 				};
 				this.linkToAdd = {};
 				this.addLink = function(group) {
 					group.links.push(this.linkToAdd);
+					alert('# in group1: ' + linksApp.groups.length);
+					$http.post('urls.json', linksApp.groups).success(function(data) {
+						alert('Saved urls.json!');
+					}).error(function(data) {
+						alert('DID NOT SAVE');
+						console.log(data);
+					});
 					this.linkToAdd = {};
 					this.setEditing('');
 				};
