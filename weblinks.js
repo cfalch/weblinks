@@ -21,7 +21,6 @@
 				this.linkToAdd = {};
 				this.addLink = function(group) {
 					group.links.push(this.linkToAdd);
-					alert('# in group1: ' + linksApp.groups.length);
 					$http.post('urls.json', linksApp.groups).success(function(data) {
 						alert('Saved urls.json!');
 					}).error(function(data) {
@@ -36,3 +35,6 @@
 	});
 
 })();
+
+// NEXT: Figure out how to persist changes to the JSON. Apparently I cannot simply POST the file - I have
+// to POST to an app service somehow, and then have that service update the file.
