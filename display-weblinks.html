@@ -1,10 +1,10 @@
 <section ng-repeat="linkGroup in linkCtrl.groups">
-<h3>{{linkGroup.name}} <a href="" ng-click="linkCtrl.setEditing(linkGroup.name)" class="addLink" title="Add a link in {{linkGroup.name}}"></a></h3> 
+<h3>{{linkGroup.groupName}} <a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" class="addLink" title="Add a link in {{linkGroup.groupName}}"></a></h3> 
 <div ng-repeat="link in linkGroup.links">
 	<a href="{{link.url}}">{{link.title}}</a>
 	<div style="display:inline-block" ng-show="{{link.comment.length > 0}}">-- {{link.comment}}</div>
 </div>
-<div ng-show="linkCtrl.isEditing(linkGroup.name)">
+<div ng-show="linkCtrl.isEditing(linkGroup.groupName)">
 	<form name="addForm"
 		ng-submit="addForm.$valid && linkCtrl.addLink(linkGroup)" novalidate>
 		<fieldset class="form-group">
