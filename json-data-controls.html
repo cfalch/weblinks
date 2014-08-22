@@ -1,0 +1,22 @@
+<a href="#" ng-show="dataCtrl.isJsonFromLocalStorage()" class="label label-warning" 
+  data-toggle="modal" 
+  data-target="#jsonModal">via Local Storage</a>
+<span ng-show="dataCtrl.isJsonFromDisk()" class="label label-info">via Disk</span>
+
+<!-- The Modal Dialog -->
+<div class="modal fade" id="jsonModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Copy to urls.json, Save, then Close</h4>
+      </div>
+      <div class="modal-body">
+        <pre>{{dataCtrl.getWeblinksAsJson()}}</pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel (do nothing)</button>
+        <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" ng-click="dataCtrl.clearJsonLocal()">Submit (clear local storage)</button>
+      </div>
+    </div>
+  </div>
+</div>
