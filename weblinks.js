@@ -116,5 +116,6 @@
 
 })();
 
-// NEXT: Figure out how to persist changes to the JSON. Apparently I cannot simply POST the file - I have
-// to POST to an app service somehow, and then have that service update the file.
+// NEXT: Figure out why IE caches so agressively. See if I can't refactor our a dataRefresh()
+// function that can be used by dataCtrl and linkCtrl. Then I may be able to force a dataRefresh
+// via $http from within clearJsonLocal();
