@@ -5,14 +5,32 @@ body {
 	width: 16px;
 	height:16px;
 	display:inline-block;
-	background-image: url('plus_16.png');
+	background-image: url('sprites_16.png');
 }
 .addLink:hover {
-	background-image: url('tick_16.png');
+	background-position: 0 -16px;
 }
 .ng-invalid.ng-dirty {
   border-color: red;
 }
 .ng-valid.ng-dirty {
   border-color: green;
+}
+.show-grid [class^=col-] {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #eee;
+    background-color: rgba(86,61,124,.15);
+    border: 1px solid #ddd;
+    border: 1px solid rgba(86, 61, 124, .2);
+}
+.hide-grid [class^=col-] {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#searchDiv {
+	text-align: right;
+}
+h3 {
+	margin-top:0px;
 }

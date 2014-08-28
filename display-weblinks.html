@@ -1,4 +1,5 @@
-<section ng-repeat="linkGroup in linkCtrl.groups">
+<div class="row hide-grid">
+<section class="col-sm-6 col-md-4" ng-repeat="linkGroup in linkCtrl.groups">
 <h3>{{linkGroup.groupName}} <a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" class="addLink" title="Add a link in {{linkGroup.groupName}}"></a></h3> 
 <div ng-repeat="link in linkGroup.links">
 	<a href="{{link.url}}">{{link.title}}</a>
@@ -17,6 +18,7 @@
 	</form>
 </div>
 </section>
+</div>
 
 <!-- NEXT:  -->
 <!-- LATER: Style the page 'responsively' using columns, and test on mobile device -->

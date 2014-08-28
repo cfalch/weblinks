@@ -14,6 +14,18 @@
       {
         "title": "Bootstrap CSS",
         "url": "http://getbootstrap.com/css"
+      },
+      {
+        "title": "Angular Tutorial",
+        "url": "https://docs.angularjs.org/tutorial"
+      },
+      {
+        "title": "Angular Guide",
+        "url": "https://docs.angularjs.org/guide"
+      },
+      {
+        "title": "Angular API Reference",
+        "url": "https://docs.angularjs.org/api"
       }
     ]
   },
@@ -44,6 +56,48 @@
       {
         "title": "Google Calendar",
         "url": "https://www.google.com/calendar/render?tab=mc"
+      }
+    ]
+  },
+  {
+    "groupName": "Corp/Divisional",
+    "links": [
+      {
+        "title": "Performance Plan",
+        "url": "https://peopleplace/peopleplace/default.aspx?pid=pg00765",
+        "comment": "On PeoplePlace"
+      },
+      {
+        "title": "The Learning Connection",
+        "url": "http://lmsprod/docent/amfam_login.asp"
+      },
+      {
+        "title": "Inside I/S",
+        "url": "http://compass/insideis/"
+      },
+      {
+        "title": "Security Central",
+        "url": "http://securitycentral/"
+      },
+      {
+        "title": "Corporate Eforms",
+        "url": "http://securityaccess/securityaccess/eforms/corporate/default.asp"
+      },
+      {
+        "title": "I/S Orientation",
+        "url": "http://sharepoint/teams/isorientation/default.aspx"
+      },
+      {
+        "title": "Glossary of Terms",
+        "url": "http://home/Compass/ec/pages/ref_forms/glossary.aspx"
+      },
+      {
+        "title": "Corporate Glossary",
+        "url": "http://sharepoint/isn/Pages/Glossary.aspx"
+      },
+      {
+        "title": "Connections (Attic)",
+        "url": "http://connections/attic"
       }
     ]
   }
