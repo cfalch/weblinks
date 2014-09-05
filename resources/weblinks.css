@@ -30,7 +30,11 @@ body {
 }
 #searchDiv {
 	text-align: right;
+	margin-right: 20px;
 }
 h3 {
 	margin-top:0px;
+}
+.via {
+	margin: 20px 0;
 }

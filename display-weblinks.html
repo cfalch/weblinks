@@ -1,24 +1,24 @@
-<div class="row hide-grid">
-<section class="col-sm-6 col-md-4" ng-repeat="linkGroup in linkCtrl.groups">
-<h3>{{linkGroup.groupName}} <a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" class="addLink" title="Add a link in {{linkGroup.groupName}}"></a></h3> 
-<div ng-repeat="link in linkGroup.links">
-	<a href="{{link.url}}">{{link.title}}</a>
-	<div style="display:inline-block" ng-show="{{link.comment.length > 0}}">-- {{link.comment}}</div>
-</div>
-<div ng-show="linkCtrl.isEditing(linkGroup.groupName)">
-	<form name="addForm"
-		ng-submit="addForm.$valid && linkCtrl.addLink(linkGroup)" novalidate>
-		<fieldset class="form-group">
-		<input ng-model="linkCtrl.linkToAdd.title" type="text" class="form-control" placeholder="Name" title="Name" required />
-        <input ng-model="linkCtrl.linkToAdd.url" type="url" class="form-control" placeholder="http://example.org" title="URL" required />
-        <input ng-model="linkCtrl.linkToAdd.comment" type="text" class="form-control" placeholder="Comment" title="Comment" />
-		<input type="submit" class="btn btn-primary" value="Submit" />
-		<a class="btn btn-danger btn-xs" ng-click="linkCtrl.setEditing('')">Cancel</a>
-	</fieldset>
-	</form>
-</div>
-</section>
-</div>
+<main class="row hide-grid">
+	<section class="col-sm-6 col-md-4" ng-repeat="linkGroup in linkCtrl.groups">
+	<h3>{{linkGroup.groupName}} <a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" class="addLink" title="Add a link in {{linkGroup.groupName}}"></a></h3> 
+	<div ng-repeat="link in linkGroup.links">
+		<a href="{{link.url}}">{{link.title}}</a>
+		<div style="display:inline-block" ng-show="{{link.comment.length > 0}}">-- {{link.comment}}</div>
+	</div>
+	<div ng-show="linkCtrl.isEditing(linkGroup.groupName)">
+		<form name="addForm"
+			ng-submit="addForm.$valid && linkCtrl.addLink(linkGroup)" novalidate>
+			<fieldset class="form-group">
+			<input ng-model="linkCtrl.linkToAdd.title" type="text" class="form-control" placeholder="Name" title="Name" required autofocus />
+	        <input ng-model="linkCtrl.linkToAdd.url" type="url" class="form-control" placeholder="http://example.org" title="URL" required />
+	        <input ng-model="linkCtrl.linkToAdd.comment" type="text" class="form-control" placeholder="Comment" title="Comment" />
+			<input type="submit" class="btn btn-primary" value="Submit" />
+			<a class="btn btn-danger btn-xs" ng-click="linkCtrl.setEditing('')">Cancel</a>
+		</fieldset>
+		</form>
+	</div>
+	</section>
+</main>
 
 <!-- NEXT:  -->
 <!-- LATER: Style the page 'responsively' using columns, and test on mobile device -->

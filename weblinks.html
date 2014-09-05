@@ -15,16 +15,17 @@
 
 	</head>
 	<body>
-		<json-data-controls></json-data-controls>
-
-		<div id="searchDiv">
-			<form role="form" class="form-inline">
-			<div class="form-group" ng-controller="SearchController as searchCtrl">
-	        	<input type="text" class="form-control" id="searchInput" ng-model="searchCtrl.queryStr" placeholder="Search Weblinks">
-				{{searchCtrl.queryStr}} <!-- Update this later to filter the page -->
+		<header>
+			<json-data-controls></json-data-controls>
+			<div id="searchDiv">
+				<form role="form" class="form-inline">
+				<div class="form-group" ng-controller="SearchController as searchCtrl">
+		        	<input type="search" class="form-control" id="searchInput" ng-model="searchCtrl.queryStr" placeholder="Search Weblinks">
+					{{searchCtrl.queryStr}} <!-- Update this later to filter the page -->
+				</div>
+				</form>
 			</div>
-			</form>
-		</div>
+		</header>
 
 		<display-weblinks></display-weblinks>
 	</body>
