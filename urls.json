@@ -36,6 +36,11 @@
         "title": "Angular ng-conf",
         "url": "https://www.youtube.com/user/ngconfvideos",
         "comment": "Videos from 2014 conf"
+      },
+      {
+        "title": "ModernWeb",
+        "url": "http://modernweb.com/",
+        "comment": "LOTS of pertinent training - check this out!"
       }
     ]
   },
@@ -58,6 +63,11 @@
       {
         "url": "http://www.smashingmagazine.com/2009/02/08/50-extremely-useful-javascript-tools/",
         "title": "50 <em>Extremely</em>useful js tools"
+      },
+      {
+        "url": "http://www.javascriptkit.com/cutpastejava.shtml",
+        "title": "Free Scripts!",
+        "comment": "From JavascriptKit.com"
       }
     ]
   },
