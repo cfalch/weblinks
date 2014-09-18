@@ -1,7 +1,7 @@
-<main class="row hide-grid">
+<main class="row hide-grid" ng-controller="LinkController as linkCtrl">
 	<section class="col-sm-6 col-md-4" ng-repeat="linkGroup in linkCtrl.groups">
-	<h3>{{linkGroup.groupName}} <a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" class="addLink" title="Add a link in {{linkGroup.groupName}}"></a></h3> 
-	<div ng-repeat="link in linkGroup.links">
+	<h3 ng-show="(linkGroup.links | filter:linkCtrl.queryStr.data).length > 0">{{linkGroup.groupName}} <a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" class="addLink" title="Add a link in {{linkGroup.groupName}}"></a></h3> 
+	<div ng-repeat="link in linkGroup.links | filter:linkCtrl.queryStr.data">
 		<a href="{{link.url}}">{{link.title}}</a>
 		<div style="display:inline-block" ng-show="{{link.comment.length > 0}}">-- {{link.comment}}</div>
 	</div>

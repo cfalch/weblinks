@@ -41,6 +41,10 @@
         "title": "ModernWeb",
         "url": "http://modernweb.com/",
         "comment": "LOTS of pertinent training - check this out!"
+      },
+      {
+        "title": "HTML5 Validator",
+        "url": "http://html5.validator.nu/"
       }
     ]
   },
