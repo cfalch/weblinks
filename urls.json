@@ -49,6 +49,11 @@
       {
         "title": "Gradient Generator",
         "url": "http://www.css3factory.com/linear-gradients/"
+      },
+      {
+        "title": "All About Floats - CSS Tricks",
+        "url": "http://css-tricks.com/all-about-floats/",
+        "comment": "and how to clear them"
       }
     ]
   },
