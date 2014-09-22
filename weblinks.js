@@ -4,7 +4,7 @@
 	// To share between linkCtrl and searchCtrl
 	app.factory('QueryString', function() {
 		return {data:""}; 
-	})
+	});
 
 	var jsonFromLocalStorage = false;
 	var jsonFromDisk = false;
