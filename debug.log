@@ -1,0 +1,29 @@
+During POST from WebLinks.js:
+
+	IE10 logs: 
+	"SCRIPT7002: XMLHttpRequest: Network Error 0x2ef3, Could not complete the operation due to error 00002ef3.
+	File: weblinks.html
+	"
+
+	Firefox logs:
+	"NetworkError: 501 Unsupported method ('POST') - http://localhost:8080/ob1cnob.git/urls.json"
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+			"http://www.w3.org/TR/html4/strict.dtd">
+	<html>
+		<head>
+			<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+			<title>Error response</title>
+		</head>
+		<body>
+			<h1>Error response</h1>
+			<p>Error code: 501</p>
+			<p>Message: Unsupported method ('POST').</p>
+			<p>Error code explanation: 501 - Server does not support this operation.</p>
+		</body>
+	</html>
+
+
+===
+Resolutions:
+• You can't post directly to a static Json file; you need to create a webservice endpoint on the server to accept the POST request and update the file.
+	-•- http://stackoverflow.com/questions/21771628/angularjs-http-post-results-in-501-unsupported-method-post
