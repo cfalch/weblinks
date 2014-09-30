@@ -54,6 +54,11 @@
         "title": "All About Floats - CSS Tricks",
         "url": "http://css-tricks.com/all-about-floats/",
         "comment": "and how to clear them"
+      },
+      {
+        "title": "Normalize.css",
+        "url": "http://necolas.github.io/normalize.css/",
+        "comment": "A modern, HTML5-ready alternative to CSS resets"
       }
     ]
   },
