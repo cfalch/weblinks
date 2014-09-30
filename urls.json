@@ -59,6 +59,15 @@
         "title": "Normalize.css",
         "url": "http://necolas.github.io/normalize.css/",
         "comment": "A modern, HTML5-ready alternative to CSS resets"
+      },
+      {
+        "title": "Mozilla - HTML Reference",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+      },
+      {
+        "title": "CodePen",
+        "url": "http://codepen.io/",
+        "comment": "Front-End Playground (like JSFiddle)"
       }
     ]
   },
