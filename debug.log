@@ -27,3 +27,41 @@ During POST from WebLinks.js:
 Resolutions:
 • You can't post directly to a static Json file; you need to create a webservice endpoint on the server to accept the POST request and update the file.
 	-•- http://stackoverflow.com/questions/21771628/angularjs-http-post-results-in-501-unsupported-method-post
+
+
+
+============================
+Javascript looping issue:
+// This had an odd behavior of only changing some of the backgrounds, but not all. It was as if once inside the for loop and modifying the class on one of the array items, it was like the array shifed somehow.
+
+var toggled = false;
+var grps2 = document.getElementsByClassName('linkGroup2');
+alert(grps2.length + " 'linkGroup2' elements to update...");
+for (var i = 0; i < grps2.length; i++) {
+  alert('setting group 2 ' + i);
+  grps2[i].className = 'linkGroup';
+  toggled = true;
+}
+if (!toggled) {
+  var grps = document.getElementsByClassName('linkGroup');
+  alert(grps.length + " 'linkGroup' elements to update...");
+  for (var i = 0; i < grps.length; i++) {
+    alert('setting group ' + i);
+    grps[i].className = 'linkGroup2';
+  }
+}
+
+// This solution did work. I understand why; it's because for each execution of the while loop it checks the DOM for any elements of the given class. this is probably not very efficient.
+
+var toggled = false;
+var elt;
+while( (elt = document.getElementsByClassName('linkGroup2')[0]) != null) {
+  elt.className = 'linkGroup';
+  toggled = true;
+}
+if (!toggled) {
+  while( (elt = document.getElementsByClassName('linkGroup')[0]) != null) {
+    elt.className = 'linkGroup2';
+  }
+}
+====================================================
