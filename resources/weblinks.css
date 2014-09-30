@@ -3,11 +3,16 @@ html {
 }
 body {
     font-size: 62.5%;
-	margin: 15px;
-	/*background: url('pattern_40.gif');  use only with linkGroupGlow */
+    /* bootstrap columns come with 15px padding, and this is used to show the 
+      gutters between the content. So, I'm adding this 15px as margins on other
+      elements instead of in the body. */
+	margin: 15px 5px;
+
+    /* use the following background only with linkGroupGlow */
+    /* background: url('pattern_40.gif');  */   
 }
 h3 {
-    margin-top:0px;
+    margin-top: 0px;
 }
 h3#basic {
     font-size: 3.5em;
@@ -21,6 +26,10 @@ h3#retro {
 }
 .via {
     font-size: 1.0em;
+    margin-left: 15px;
+    margin-bottom: 15px; /* no effect */
+    /* padding-bottom: 15px;*/ /* causes the via box to overlap the search input */
+    /* border-bottom: 15px solid #fff; */ /* Border overlaps the search input */
 }
 .aWeblink {
     font-size: 1.8em;
@@ -42,13 +51,13 @@ h3#retro {
 .addLink:hover {
 	background-position: 0 -16px;
 }
-.addLink-fa, .addLink-fa:hover, .addLink-fa:active {
+.addLink-fa, .addLink-fa:hover, .addLink-fa:active, .addLink-fa:focus {
     color: rgba(0,0,100,0.6);
     text-shadow: 1px 2px 1px rgba(0,0,0,0.2);
     font-size: 0.6em;
     text-decoration: none; /* no underline */
 }
-.addLink-fa:hover {
+.addLink-fa:hover, .addLink-fa:focus {
     text-shadow: 0px 0px 5px #fff;
 }
 .ng-invalid.ng-dirty {
@@ -72,8 +81,15 @@ h3#retro {
 }
 #searchDiv {
 	text-align: right;
-	margin-right: 20px;
+	margin: 2px 15px;
 	padding-bottom: 3px;
+    height: 34px;
+        /* The search input from bootstrap is 34px. No idea if this is dynamic. 
+        If I don't also set the height of my container, then somehow it gets an extra
+        line wrap at its minimum width. This adds more spacing below it than I'm specifying
+        in css. I don't know why it happens, but I'm guessing that adding this fixed height
+        is a BAD IDEA.
+        */
 }
 .linkGroup {
     background-image: linear-gradient(to right bottom, #B6D0D9 0%, #F5F5F5 100%);
