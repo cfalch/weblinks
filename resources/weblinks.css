@@ -3,26 +3,27 @@ html {
 }
 body {
     font-size: 62.5%;
-    /* bootstrap columns come with 15px padding, and this is used to show the 
-      gutters between the content. So, I'm adding this 15px as margins on other
-      elements instead of in the body. */
 	margin: 15px 5px;
-
-    /* use the following background only with linkGroupGlow */
-    /* background: url('pattern_40.gif');  */   
+    /* bootstrap columns come with 15px padding, and this is used to show the 
+    gutters between the content. So, I'm adding this 15px as margins on other
+    elements instead of in the body. 
+    */
+}
+.linkGroupBody {
+}
+.linkGroup2Body {
+    background: none repeat scroll left top #fcfbf5; 
+}
+.linkGroupGlowBody {
+    background: url('pattern_40.gif');
 }
 h3 {
     margin-top: 0px;
 }
-h3#basic {
-    font-size: 3.5em;
-    font-family: Candara;
-    text-shadow: 2px 3px 2px #000;
-    color: #fff;
-}
-h3#retro {
-    color: #d7ceb2;
-    text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72;
+ul, li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 .via {
     font-size: 1.0em;
@@ -84,13 +85,15 @@ h3#retro {
 	margin: 2px 15px;
 	padding-bottom: 3px;
     height: 34px;
-        /* The search input from bootstrap is 34px. No idea if this is dynamic. 
-        If I don't also set the height of my container, then somehow it gets an extra
-        line wrap at its minimum width. This adds more spacing below it than I'm specifying
-        in css. I don't know why it happens, but I'm guessing that adding this fixed height
-        is a BAD IDEA.
-        */
+    /* The search input from bootstrap is 34px. No idea if this is dynamic. 
+    If I don't also set the height of my container, then somehow it gets an extra
+    line wrap at its minimum width. This adds more spacing below it than I'm specifying
+    in css. I don't know why it happens, but I'm guessing that adding this fixed height
+    is a BAD IDEA.
+    */
 }
+
+/* ---------- link group style 1 ------------------*/
 .linkGroup {
     background-image: linear-gradient(to right bottom, #B6D0D9 0%, #F5F5F5 100%);
     border: 1px solid #999;
@@ -99,27 +102,122 @@ h3#retro {
     padding: 12px 16px;
     box-shadow: 2px 3px 5px #ccc;
 }
-.linkGroup2 {
-	-moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background-color: #fefef1;
-    border-bottom-right-radius: 12px;
-    border-color: #f7a600;
-    border-image: none;
-    border-style: solid;
-    border-width: 1px 1px 1px 5px;
-    box-shadow: 2px 3px 5px #ccc;
-    color: #222;
-    margin-bottom: 10px;
-    overflow: hidden;
-    padding: 10px 16px;
+.linkGroup h3 {
+    font-size: 3.5em;
+    font-family: Candara;
+    text-shadow: 2px 3px 2px #000;
+    color: #fff;
 }
+.linkGroup h3 .addLink-fa, .linkGroup h3 .addLink-fa:hover, .linkGroup h3 .addLink-fa:active {
+    color: rgba(0,0,100,0.6);
+    text-shadow: 1px 2px 1px rgba(0,0,0,0.2);
+    font-size: 0.6em;
+    text-decoration: none; /* no underline */
+}
+.linkGroup .addLink-fa:hover {
+    text-shadow: 0px 0px 5px #fff;
+}
+.linkGroup .aWeblink {
+    font-size: 1.8em;
+    font-family:Garamond,serif;
+}
+.linkGroup .aWeblink .comment {
+    font-size: 0.8em;
+    font-family: Maiandra GD, MV boli, Tahoma, serif;
+}
+.linkGroup .addLink-fa {
+    /* Won't be needed once linkGroup(1) removes the addLink image */
+    display: none;
+}
+
+/* ---------- link group style 2 ------------------*/
+.linkGroup2 {
+    font-size: 0.9em;
+    background-color: #fefdfa;
+    border: 1px solid #aab123;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    padding: 12px 16px;
+}
+.linkGroup2 h3 {
+    font: bold 1.9em Candara;
+    color: #333333;
+    border-bottom: 1px solid #aab123;
+    padding-bottom: 8px;
+}
+.linkGroup2 h3 .addLink-fa, .linkGroup h3 .addLink-fa:hover, .linkGroup h3 .addLink-fa:active {
+    font-size: 1.1em;
+    color: #0041A1;
+    /*text-shadow: 1px 2px 1px rgba(0,0,0,0.2); */
+    text-decoration: none; /* no underline */
+}
+.linkGroup2 .addLink-fa:hover {
+    
+}
+.linkGroup2 .aWeblink {
+    font-size: 1.6em;
+    font-family: Alef, serif;
+}
+.linkGroup2 .aWeblink .comment {
+    font-size: 0.9em;
+    font-family: Maiandra GD, MV boli, Tahoma, serif;
+}
+.linkGroup2 .addLink {
+    /* Won't be needed once linkGroup(1) removes the addLink image */
+    display: none;
+}
+
+/* ---------- link group style 3 ------------------*/
 .linkGroupGlow {
 	box-shadow: 0 0 14px #fff;
-	border-radius: 6px 0 15px 0;
-	margin-bottom: 4px;
+	border-radius: 14px;
+	margin: 14px 0 0 0;
 	color: #000;
 	text-shadow: 1px 1px 4px #fff;
+    padding: 12px 16px;
+}
+.linkGroupGlow .aWeblink {
+    font-size: 1.6em;
+    font-family: Tempus Sans ITC, MV boli, serif;
+}
+.linkGroupGlow .aWeblink .comment {
+    font-size: 0.9em;
+    font-weight: 600;
+    font-family: Maiandra GD, MV boli, Tahoma, serif;
+}
+.linkGroupGlowBody #searchDiv input {
+    font-size: 1.5em;
+}
+.linkGroupGlow .addLink {
+    /* Won't be needed once linkGroup(1) removes the addLink image */
+    display: none;
+}
+.linkGroupGlow h3 {
+
+    line-height: 1.4em; /* Prevents the hover transition from enlarging the div */
+
+}
+.linkGroupGlow h3 .addLink-fa, .linkGroupGlow h3 .linkGroupGlow h3 .addLink-fa:active {
+    font-size: 0.7em;
+    color: #000;
+    text-decoration: none; /* no underline */
+    text-shadow: 1px 1px 4px #fff;
+    transition: font-size 0.2s linear 0s;
+}
+.linkGroupGlow .addLink-fa:hover {
+    /*text-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(66, 139, 202, 0.6);*/
+    font-size: 1.2em;
+    transition: font-size 0.4s linear 0s;
+}
+/* Override form inputs for linkGlow */
+.linkGroupGlowBody .form-control {
+    color: #777;
+    background-color: #000;
+    font-family: Maiandra GD, MV boli, Tahoma, serif;
+    font-weight: 600;
+    border-color: rgba(66, 139, 202, 0.7);
+}
+.linkGroupGlowBody .form-control:focus {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(66, 139, 202, 0.6);
 }

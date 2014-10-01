@@ -1,34 +1,36 @@
 <main class="container-fluid">
-  <div class="row" ng-controller="LinkController as linkCtrl">
-	<section class="col-sm-6 col-md-4" 
-		ng-show="(linkGroup.links | filter:linkCtrl.queryStr.data).length > 0" 
-		ng-repeat="linkGroup in linkCtrl.groups">
-	<div class="linkGroup">
-		<h3 id="basic">{{linkGroup.groupName}} 
-			<a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" class="addLink" title="Add a link in {{linkGroup.groupName}}"></a>
-			<a href="" title" Add a link in {{linkGroup.groupName}}"<i class="fa fa-plus addLink-fa"></i></a>
-		</h3>
-		<div class="aWeblink" ng-repeat="link in linkGroup.links | filter:linkCtrl.queryStr.data">
-			<a href="{{link.url}}">{{link.title}}</a>
-			<span class="comment" ng-show="{{link.comment.length > 0}}">-- {{link.comment}}</span>
-		</div>
+	<div class="row" ng-controller="LinkController as linkCtrl">
+		<section class="col-sm-6 col-md-4"
+			ng-show="(linkGroup.links | filter:linkCtrl.queryStr.data).length > 0" 
+			ng-repeat="linkGroup in linkCtrl.groups">
+			<div class="linkGroup">
+				<h3>{{linkGroup.groupName}} 
+				<a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" class="addLink" title="Add a link in {{linkGroup.groupName}}"></a>
+				<a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" title="Add a link in {{linkGroup.groupName}}"<i class="fa fa-plus addLink-fa"></i></a>
+				</h3>
+				<ul>
+					<li class="aWeblink" ng-repeat="link in linkGroup.links | filter:linkCtrl.queryStr.data">
+						<a href="{{link.url}}">{{link.title}}</a>
+						<span class="comment" ng-show="{{link.comment.length > 0}}">-- {{link.comment}}</span>
+					</li>
+				</ul>
+			</div>
+			<div ng-show="linkCtrl.isEditing(linkGroup.groupName)">
+				<form name="addForm"
+					ng-submit="addForm.$valid && linkCtrl.addLink(linkGroup)" novalidate>
+					<fieldset class="form-group">
+					<input ng-model="linkCtrl.linkToAdd.title" type="text" class="form-control" placeholder="Name" title="Name" required autofocus />
+					<input ng-model="linkCtrl.linkToAdd.url" type="url" class="form-control" placeholder="http://example.org" title="URL" required />
+					<input ng-model="linkCtrl.linkToAdd.comment" type="text" class="form-control" placeholder="Comment" title="Comment" />
+					<input type="submit" class="btn btn-primary" value="Submit" />
+					<a class="btn btn-danger btn-xs" ng-click="linkCtrl.setEditing('')">Cancel</a>
+					</fieldset>
+				</form>
+			</div>
+		</section>
 	</div>
-	<div ng-show="linkCtrl.isEditing(linkGroup.groupName)">
-		<form name="addForm"
-			ng-submit="addForm.$valid && linkCtrl.addLink(linkGroup)" novalidate>
-			<fieldset class="form-group">
-			<input ng-model="linkCtrl.linkToAdd.title" type="text" class="form-control" placeholder="Name" title="Name" required autofocus />
-	        <input ng-model="linkCtrl.linkToAdd.url" type="url" class="form-control" placeholder="http://example.org" title="URL" required />
-	        <input ng-model="linkCtrl.linkToAdd.comment" type="text" class="form-control" placeholder="Comment" title="Comment" />
-			<input type="submit" class="btn btn-primary" value="Submit" />
-			<a class="btn btn-danger btn-xs" ng-click="linkCtrl.setEditing('')">Cancel</a>
-		</fieldset>
-		</form>
-	</div>
-	</section>
-  </div>
 </main>
 
-<!-- NEXT:  -->
+<!-- NEXT: -->
 <!-- LATER: Style the page 'responsively' using columns, and test on mobile device -->
 <!-- LATER: Add a usageCount for each link and increment it when clicked. Style based on usage, to make the links used more often more prevalent -->
