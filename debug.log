@@ -30,7 +30,7 @@ Resolutions:
 
 
 
-============================
+====================================================
 Javascript looping issue:
 // This had an odd behavior of only changing some of the backgrounds, but not all. It was as if once inside the for loop and modifying the class on one of the array items, it was like the array shifed somehow.
 
