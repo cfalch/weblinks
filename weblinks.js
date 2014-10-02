@@ -41,7 +41,7 @@
 				//alert('Saved urls.json!');
 			}).error(function(data) {
 				//alert('DID NOT SAVE');
-				console.log(data);
+				//console.log(data);
 			});
 			saveJsonLocal(linksApp.groups);
 			jsonFromLocalStorage = true;
@@ -49,6 +49,9 @@
 			jsonData = linksApp.groups; // Update global var; Shouldn't this already be updated by reference?
 			this.linkToAdd = {};
 			this.setEditing('');
+		};
+		this.getThemeClassName = function() {
+			return getThemeClass();
 		};
 	}]);
 
