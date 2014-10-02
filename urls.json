@@ -68,6 +68,10 @@
         "title": "CodePen",
         "url": "http://codepen.io/",
         "comment": "Front-End Playground (like JSFiddle)"
+      },
+      {
+        "title": "Fisheye/Crucible",
+        "url": "https://confluence.atlassian.com/display/CRUCIBLE/Crucible+and+FishEye"
       }
     ]
   },
