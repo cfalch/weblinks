@@ -178,5 +178,19 @@
         "url": "http://connections/attic"
       }
     ]
+  },
+  {
+    "groupName": "Loyalty",
+    "links": [
+      {
+        "title": "Sharepoint",
+        "url": "http://sharepoint/projects/loyalty"
+      },
+      {
+        "title": "Architecture / SAD",
+        "url": "http://sharepoint/projects/loyalty/projectdocuments/Forms/Group.aspx?RootFolder=%2Fprojects%2Floyalty%2Fprojectdocuments%2FArchitecture%20and%20Design%2FArchitecture",
+        "comment": ""
+      }
+    ]
   }
 ]
