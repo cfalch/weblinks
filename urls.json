@@ -79,6 +79,11 @@
         "comment": "Videos from 2014 conf"
       },
       {
+        "title": "angular-element",
+        "url": "https://docs.angularjs.org/api/ng/function/angular.element",
+        "comment": "jqLite -- impl. of JQuery methods"
+      },
+      {
         "title": "TODO: Scopes",
         "url": "https://docs.angularjs.org/guide/scope"
       },
