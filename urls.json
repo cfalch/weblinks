@@ -16,26 +16,9 @@
         "url": "http://getbootstrap.com/css"
       },
       {
-        "title": "Angular Tutorial",
-        "url": "https://docs.angularjs.org/tutorial"
-      },
-      {
-        "title": "Angular Guide",
-        "url": "https://docs.angularjs.org/guide"
-      },
-      {
-        "title": "Angular API Reference",
-        "url": "https://docs.angularjs.org/api"
-      },
-      {
         "title": "Can I use",
         "url": "http://caniuse.com/",
         "comment": "Support tables for HTML5, CSS3, etc."
-      },
-      {
-        "title": "Angular ng-conf",
-        "url": "https://www.youtube.com/user/ngconfvideos",
-        "comment": "Videos from 2014 conf"
       },
       {
         "title": "ModernWeb",
@@ -72,6 +55,36 @@
       {
         "title": "Fisheye/Crucible",
         "url": "https://confluence.atlassian.com/display/CRUCIBLE/Crucible+and+FishEye"
+      }
+    ]
+  },
+  {
+    "groupName": "A<ng>ular",
+    "links": [
+      {
+        "title": "Angular Tutorial",
+        "url": "https://docs.angularjs.org/tutorial"
+      },
+      {
+        "title": "Angular Guide",
+        "url": "https://docs.angularjs.org/guide"
+      },
+      {
+        "title": "Angular API Reference",
+        "url": "https://docs.angularjs.org/api"
+      },
+      {
+        "title": "Angular ng-conf",
+        "url": "https://www.youtube.com/user/ngconfvideos",
+        "comment": "Videos from 2014 conf"
+      },
+      {
+        "title": "TODO: Scopes",
+        "url": "https://docs.angularjs.org/guide/scope"
+      },
+      {
+        "title": "TODO: egghead.io videos",
+        "url": "https://egghead.io/technologies/angularjs"
       }
     ]
   },
