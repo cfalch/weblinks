@@ -1,10 +1,10 @@
 <main class="container-fluid">
 	<div class="row" ng-controller="LinkController as linkCtrl">
 		<section class="col-sm-6 col-md-4"
-			ng-show="(linkGroup.links | filter:linkCtrl.queryStr.data).length > 0" 
-			ng-repeat="linkGroup in linkCtrl.groups">	
+			ng-show="(linkGroup.links | filter:linkCtrl.queryStr.data).length > 0"
+			ng-repeat="linkGroup in linkCtrl.groups | orderBy:'links.length'">
 			<div name="link-group" class="{{linkCtrl.getThemeClassName()}}">
-				<h3>{{linkGroup.groupName}} 
+				<h3>{{linkGroup.groupName}}
 				<a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" class="addLink" title="Add a link in {{linkGroup.groupName}}"></a>
 				<a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" title="Add a link in {{linkGroup.groupName}}"<i class="fa fa-plus addLink-fa"></i></a>
 				</h3>
