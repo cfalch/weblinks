@@ -2,7 +2,7 @@
 	<div class="row" ng-controller="LinkController as linkCtrl">
 		<section class="col-sm-6 col-md-4"
 			ng-show="(linkGroup.links | filter:linkCtrl.queryStr.data).length > 0" 
-			ng-repeat="linkGroup in linkCtrl.groups">
+			ng-repeat="linkGroup in linkCtrl.groups">	
 			<div name="link-group" class="{{linkCtrl.getThemeClassName()}}">
 				<h3>{{linkGroup.groupName}} 
 				<a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" class="addLink" title="Add a link in {{linkGroup.groupName}}"></a>
@@ -19,7 +19,7 @@
 				<form name="addForm"
 					ng-submit="addForm.$valid && linkCtrl.addLink(linkGroup)" novalidate>
 					<fieldset class="form-group">
-					<input ng-model="linkCtrl.linkToAdd.title" type="text" class="form-control" placeholder="Name" title="Name" required autofocus />
+					<input ng-model="linkCtrl.linkToAdd.title" type="text" class="form-control" placeholder="Name" title="Name" required autofocus="true" ng-focus="true" />
 					<input ng-model="linkCtrl.linkToAdd.url" type="url" class="form-control" placeholder="http://example.org" title="URL" required />
 					<input ng-model="linkCtrl.linkToAdd.comment" type="text" class="form-control" placeholder="Comment" title="Comment" />
 					<input type="submit" class="btn btn-primary" value="Save" />
@@ -31,6 +31,5 @@
 	</div>
 </main>
 
-<!-- NEXT: -->
-<!-- LATER: Style the page 'responsively' using columns, and test on mobile device -->
-<!-- LATER: Add a usageCount for each link and increment it when clicked. Style based on usage, to make the links used more often more prevalent -->
+<!-- TODO: Add a 'no results found' message when filter has no hits. Ex here: https://docs.angularjs.org/api/ng/directive/ngRepeat -->
+<!-- TODO: Add a usageCount for each link and increment it when clicked. Style based on usage, to make the links used more often more prevalent -->

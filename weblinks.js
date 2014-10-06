@@ -14,7 +14,7 @@
 		this.queryStr = QueryString;
 	});
 
-	app.controller('LinkController', ['QueryString', '$http', function(QueryString, $http) {
+	app.controller('LinkController', ['QueryString', '$http', '$log', function(QueryString, $http, $log) {
 		var linksApp = this;
 		this.queryStr = QueryString;
 		linksApp.groups = loadJsonLocal();
@@ -38,10 +38,10 @@
 		this.addLink = function(group) {
 			group.links.push(this.linkToAdd);
 			$http.post('urls.json', linksApp.groups).success(function(data) {
-				//alert('Saved urls.json!');
+				$log.info('Saved urls.json!');
 			}).error(function(data) {
-				//alert('DID NOT SAVE');
-				//console.log(data);
+				$log.error('DID NOT SAVE!');
+				$log.info(data);
 			});
 			saveJsonLocal(linksApp.groups);
 			jsonFromLocalStorage = true;
@@ -129,3 +129,4 @@
 // NEXT: Figure out why IE caches so agressively. See if I can't refactor our a dataRefresh()
 // function that can be used by dataCtrl and linkCtrl. Then I may be able to force a dataRefresh
 // via $http from within clearJsonLocal();
+// TODO: After search, if there's only one result and the <enter> key is clicked, go to that url.
