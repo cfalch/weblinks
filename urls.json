@@ -90,6 +90,10 @@
       {
         "title": "TODO: egghead.io videos",
         "url": "https://egghead.io/technologies/angularjs"
+      },
+      {
+        "url": "http://andyshora.com/unit-testing-best-practices-angularjs.html",
+        "title": "Unit Testing Best Practices"
       }
     ]
   },
@@ -117,6 +121,16 @@
         "url": "http://www.javascriptkit.com/cutpastejava.shtml",
         "title": "Free Scripts!",
         "comment": "From JavascriptKit.com"
+      },
+      {
+        "title": "Jasmine",
+        "url": "http://jasmine.github.io/2.0/introduction.html",
+        "comment": "Javascript test framework"
+      },
+      {
+        "title": "Mocha",
+        "url": "http://visionmedia.github.io/mocha/",
+        "comment": "Javascript and UI/style test framework"
       }
     ]
   },
