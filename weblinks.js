@@ -1,17 +1,24 @@
 (function() {
 	var app = angular.module('weblinks', []);
 
+	var jsonData = [];
+	var jsonFrom = ""; // Keeps track of source for jsonData
+	var LOCAL_STG = "localstorage";
+	var DISK = "disk";
+
 	// To share between linkCtrl and searchCtrl
 	app.factory('QueryString', function() {
-		return {data:""}; 
+		return {data:""}; // The text of the search filter
 	});
-
-	var jsonFromLocalStorage = false;
-	var jsonFromDisk = false;
-	var jsonData = [];
 
 	app.controller('SearchController', function(QueryString) {
 		this.queryStr = QueryString;
+		this.gotoSingleWeblink = function() {
+			var matches = getFilteredLinks(this.queryStr.data, jsonData);
+			if(matches.length == 1) {
+				window.location = matches[0].url;
+			}
+		};
 	});
 
 	app.controller('LinkController', ['QueryString', '$http', '$log', function(QueryString, $http, $log) {
@@ -19,14 +26,15 @@
 		this.queryStr = QueryString;
 		linksApp.groups = loadJsonLocal();
 		if(linksApp.groups.length > 0) {
-			jsonFromLocalStorage = true;
+			jsonData = linksApp.groups;
+			jsonFrom = LOCAL_STG;
 		} else {
 			$http.get('urls.json').success(function(data) {
+				jsonData = data;
 				linksApp.groups = data;
-				jsonFromDisk = true;
+				jsonFrom = DISK;
 			});
 		}
-		jsonData = linksApp.groups;
 		this.editGroup = "";
 		this.isEditing = function(groupName) {
 			return groupName == this.editGroup;
@@ -44,14 +52,16 @@
 				$log.info(data);
 			});
 			saveJsonLocal(linksApp.groups);
-			jsonFromLocalStorage = true;
-			jsonFromDisk = false;
+			jsonFrom = LOCAL_STG;
 			jsonData = linksApp.groups; // Update global var; Shouldn't this already be updated by reference?
 			this.linkToAdd = {};
 			this.setEditing('');
 		};
 		this.getThemeClassName = function() {
 			return getThemeClass();
+		};
+		this.debugSearch = function() {
+			return getFilteredLinks(this.queryStr.data, linksApp.groups);
 		};
 	}]);
 
@@ -69,10 +79,10 @@
 			templateUrl: 'json-data-controls.html',
 			controller: function() {
 				this.isJsonFromLocalStorage = function() {
-					return jsonFromLocalStorage;
+					return jsonFrom === LOCAL_STG;
 				};
 				this.isJsonFromDisk = function() {
-					return jsonFromDisk;
+					return jsonFrom === DISK;
 				};
 				this.getWeblinksAsJson = function() {
 					return angular.toJson(jsonData, true);
@@ -80,8 +90,7 @@
 				this.clearJsonLocal = function() {
 					if(typeof(Storage) != "undefined") {
 						window.localStorage.removeItem("weblinks-json");
-						jsonFromLocalStorage = false;
-						jsonFromDisk = true;
+						jsonFrom = DISK;
 					}
 				};
 			}, controllerAs: 'dataCtrl'
@@ -122,6 +131,30 @@
 		if(typeof(Storage) != "undefined") {
 			window.localStorage.removeItem("weblinks-json");
 		}
+	};
+
+	var getFilteredLinks = function(queryString, groups) {
+		// I'm pretty much re-implementing the filter that's already run in the page. I couldn't figure
+		// out how to combine the filter results from EACH GROUP in order to tally up the search results
+		// to see if there were no matches in any group.
+		console.log("debugSearch(" + queryString + ")...");
+		console.log("groups.length = " + groups.length);
+		var queryStr = queryString.toLowerCase();
+		var matches = [];
+		for(var i = 0; i < groups.length; i++) {
+			var group = groups[i];
+			for(var j = 0; j < group.links.length; j++) {
+				var webl = group.links[j];
+				var weblTitle = webl.title.toLowerCase();
+				var weblUrl = webl.url.toLowerCase();
+				if( (weblTitle.indexOf(queryString) >= 0) 
+					|| (weblUrl.indexOf(queryString) >= 0) ) {
+					matches.push(webl);
+				}
+			}
+		}
+		console.info("..." + matches.length + " matches");
+		return matches;
 	};
 
 })();

@@ -8,21 +8,20 @@
 		<link rel="stylesheet" href="resources/weblinks.css" />
 		<title> ng-WebLinks </title>
 		<script src="themer.js"></script> <!-- Used onload -->
-
 	</head>
 	<body class="linkGroupBody" onload="loadTheme();">
 		<header>
 			<json-data-controls></json-data-controls>
-			<div id="searchDiv">
-				<form role="form" class="form-inline">
-				<div class="form-group" ng-controller="SearchController as searchCtrl">
-				<input type="search" class="form-control" id="searchInput" ng-model="searchCtrl.queryStr.data" placeholder="Search Weblinks">
+			<div id="searchDiv" ng-controller="SearchController as searchCtrl">
+				<form name="searchForm" role="form" class="form-inline" ng-submit="searchCtrl.gotoSingleWeblink()">
+				<div class="form-group">
+					<input type="search" name="searchInput" placeholder="Search Weblinks" class="form-control" id="searchInput" 
+				ng-model="searchCtrl.queryStr.data">
 				</div>
 				</form>
 			</div>
 		</header>
 		<display-weblinks></display-weblinks>
-
 		<script src="resources/angular.min.js"></script>
 		<script src="resources/jquery-2.1.1.min.js"></script> <!-- required by bootstrap modal -->
 		<script src="resources/bootstrap.min.js"></script>

@@ -94,6 +94,10 @@
       {
         "url": "http://andyshora.com/unit-testing-best-practices-angularjs.html",
         "title": "Unit Testing Best Practices"
+      },
+      {
+        "title": "Angular UI Bootstrap",
+        "url": "http://angular-ui.github.io/bootstrap/"
       }
     ]
   },

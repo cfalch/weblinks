@@ -1,15 +1,21 @@
-<main class="container-fluid">
-	<div class="row" ng-controller="LinkController as linkCtrl">
+<main class="container-fluid" ng-controller="LinkController as linkCtrl">
+	<div class="row">
 		<section class="col-sm-6 col-md-4"
-			ng-show="(linkGroup.links | filter:linkCtrl.queryStr.data).length > 0"
+			ng-show="searchResults.length > 0"
 			ng-repeat="linkGroup in linkCtrl.groups | orderBy:'links.length'">
+			<!--Each group is hidden if the search query filters all results. 'searchResults' is 
+			defined in the ng-repeat BELOW for weblinks in this group -->
 			<div name="link-group" class="{{linkCtrl.getThemeClassName()}}">
 				<h3>{{linkGroup.groupName}}
-				<a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" class="addLink" title="Add a link in {{linkGroup.groupName}}"></a>
-				<a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" title="Add a link in {{linkGroup.groupName}}"<i class="fa fa-plus addLink-fa"></i></a>
+				<a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" title="Add a link in {{linkGroup.groupName}}"
+					class="addLink">
+				</a>
+				<a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" title="Add a link in {{linkGroup.groupName}}"
+					<span class="fa fa-plus addLink-fa"></span>
+				</a>
 				</h3>
 				<ul>
-					<li class="aWeblink" ng-repeat="link in linkGroup.links | filter:linkCtrl.queryStr.data">
+					<li class="aWeblink" ng-repeat="link in linkGroup.links | filter:linkCtrl.queryStr.data as searchResults">
 						<a href="{{link.url}}">{{link.title}}</a>
 						<span class="comment" ng-show="{{link.comment.length > 0}}">-- {{link.comment}}</span>
 					</li>
@@ -29,6 +35,8 @@
 			</div>
 		</section>
 	</div>
+	<div ng-show="linkCtrl.debugSearch().length == 0" class="noResults">No Results Found</div>
+	<!-- TODO: Don't call this function if there's nothing in the search input -->
 </main>
 
 <!-- TODO: Add a 'no results found' message when filter has no hits. Ex here: https://docs.angularjs.org/api/ng/directive/ngRepeat -->
