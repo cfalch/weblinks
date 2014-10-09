@@ -14,7 +14,7 @@
 	app.controller('SearchController', function(QueryString) {
 		this.queryStr = QueryString;
 		this.gotoSingleWeblink = function() {
-			var matches = getFilteredLinks(this.queryStr.data, jsonData);
+			var matches = app.getFilteredLinks(this.queryStr.data, jsonData);
 			if(matches.length == 1) {
 				window.location = matches[0].url;
 			}
@@ -60,10 +60,18 @@
 		this.getThemeClassName = function() {
 			return getThemeClass();
 		};
-		this.debugSearch = function() {
-			return getFilteredLinks(this.queryStr.data, linksApp.groups);
+		this.getFilteredLinks = function() {
+			return app.getFilteredLinks(this.queryStr.data, linksApp.groups);
 		};
 	}]);
+
+	app.directive("displaySearch", function() {
+		return {
+			restrict: 'E',
+			templateUrl: 'display-search.html',
+			controller: 'SearchController'
+		};
+	})
 
 	app.directive("displayWeblinks", function() {
 		return {
@@ -133,12 +141,10 @@
 		}
 	};
 
-	var getFilteredLinks = function(queryString, groups) {
+	app.getFilteredLinks = function(queryString, groups) {
 		// I'm pretty much re-implementing the filter that's already run in the page. I couldn't figure
 		// out how to combine the filter results from EACH GROUP in order to tally up the search results
 		// to see if there were no matches in any group.
-		console.log("debugSearch(" + queryString + ")...");
-		console.log("groups.length = " + groups.length);
 		var queryStr = queryString.toLowerCase();
 		var matches = [];
 		for(var i = 0; i < groups.length; i++) {
@@ -153,7 +159,6 @@
 				}
 			}
 		}
-		console.info("..." + matches.length + " matches");
 		return matches;
 	};
 

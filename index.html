@@ -1,0 +1,26 @@
+<!doctype html>
+<html ng-app="weblinks">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="resources/bootstrap.min.css" />
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+		<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Alef:400,700">
+		<link rel="stylesheet" href="resources/weblinks.css" />
+		<title> ng-WebLinks </title>
+	</head>
+	<body class="linkGroupBody" onload="loadTheme();">
+
+		<json-data-controls></json-data-controls>
+		<display-search></display-search>
+		<display-weblinks></display-weblinks>
+		
+		<script src="resources/angular.min.js"></script>
+		<script src="resources/jquery-2.1.1.min.js"></script> <!-- required by bootstrap modal -->
+		<script src="resources/bootstrap.min.js"></script>
+		<script src="themer.js"></script> <!-- Used onload -->
+		<script src="weblinks.js"></script>
+	</body>
+</html>
+
+<!-- TODO: Create a new custom directive to add a new category and update the JSON. Then redisplay the page with the empty category. The existing control would allow adding a link into the new category -->
+<!-- TODO: Add a control that would show delete icons for existing links. Deleting would set a 'deleted' bit on the JSON, then save. -->
