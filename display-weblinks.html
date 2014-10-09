@@ -15,7 +15,8 @@
 				</a>
 				</h3>
 				<ul>
-					<li class="aWeblink" ng-repeat="link in linkGroup.links | filter:linkCtrl.queryStr.data as searchResults">
+					<li class="aWeblink" 
+						ng-repeat="link in linkGroup.links | orderBy:'url' | filter:linkCtrl.queryStr.data as searchResults">
 						<a href="{{link.url}}">{{link.title}}</a>
 						<span class="comment" ng-show="{{link.comment.length > 0}}">-- {{link.comment}}</span>
 					</li>
