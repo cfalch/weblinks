@@ -59,6 +59,10 @@
       {
         "title": "GitHub Help Pages",
         "url": "http://help.github.com"
+      },
+      {
+        "title": "Sass Guide",
+        "url": "http://sass-lang.com/guide"
       }
     ]
   },
