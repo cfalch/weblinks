@@ -1,7 +1,7 @@
 <main class="container-fluid" ng-controller="LinkController as linkCtrl">
 	<div class="row">
 		<section class="col-sm-6 col-md-4"
-			ng-show="searchResults.length > 0"
+			ng-show="searchResults.length > 0 && linkGroup.groupName != 'Certes'"
 			ng-repeat="linkGroup in linkCtrl.groups | orderBy:'links.length'">
 			<!--Each group is hidden if the search query filters all results. 'searchResults' is 
 			defined in the ng-repeat BELOW for weblinks in this group -->
@@ -16,7 +16,7 @@
 				</h3>
 				<ul>
 					<li class="aWeblink" 
-						ng-repeat="link in linkGroup.links | orderBy:'url' | filter:linkCtrl.queryStr.data as searchResults">
+						ng-repeat="link in linkGroup.links | orderBy:'title' | filter:linkCtrl.queryStr.data as searchResults">
 						<a href="{{link.url}}">{{link.title}}</a>
 						<span class="comment" ng-show="{{link.comment.length > 0}}">-- {{link.comment}}</span>
 					</li>
