@@ -1,0 +1,13 @@
+{
+  "name": "weblinks",
+  "private": true,
+  "version": "0.0.0",
+  "description": "WebLinks (tm)",
+  "repository": "https://github.com/cfalch/weblinks",
+  "license": "???",
+  "devDependencies": {
+  },
+  "scripts": {
+    "start": "http-server -a localhost -p 7777 -c-1"
+  }
+}
