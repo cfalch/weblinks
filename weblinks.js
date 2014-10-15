@@ -164,7 +164,6 @@
 
 })();
 
-// NEXT: Figure out why IE caches so agressively. See if I can't refactor our a dataRefresh()
+// TODO: Figure out why IE caches so aggressively. See if I can't refactor our a dataRefresh()
 // function that can be used by dataCtrl and linkCtrl. Then I may be able to force a dataRefresh
 // via $http from within clearJsonLocal();
-// TODO: Add a route so that it's not necessary to type in the .html page.
