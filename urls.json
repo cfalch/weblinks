@@ -143,6 +143,10 @@
         "title": "Mocha",
         "url": "http://visionmedia.github.io/mocha/",
         "comment": "Javascript and UI/style test framework"
+      },
+      {
+        "title": "Javascript Beautifier",
+        "url": "http://jsbeautifier.org/"
       }
     ]
   },
