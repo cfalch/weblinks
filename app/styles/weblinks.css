@@ -15,7 +15,7 @@ body {
     background: none repeat scroll left top #fcfbf5; 
 }
 .linkGroupGlowBody {
-    background: url('pattern_40.gif');
+    background: url('../images/pattern_40.gif');
 }
 h3 {
     margin-top: 0px;
@@ -47,7 +47,7 @@ ul, li {
 	width: 16px;
 	height:16px;
 	display:inline-block;
-	background-image: url('sprites_16.png');
+	background-image: url('../images/sprites_16.png');
 }
 .addLink:hover {
 	background-position: 0 -16px;
