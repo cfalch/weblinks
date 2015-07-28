@@ -151,10 +151,12 @@
 			var group = groups[i];
 			for(var j = 0; j < group.links.length; j++) {
 				var webl = group.links[j];
-				var weblTitle = webl.title.toLowerCase();
-				var weblUrl = webl.url.toLowerCase();
-				if( (weblTitle.indexOf(queryString) >= 0) 
-					|| (weblUrl.indexOf(queryString) >= 0) ) {
+				var weblTitle = webl.title.toLowerCase(); // title is required
+				var weblUrl = webl.url.toLowerCase(); // url is required
+				var weblComment = webl.comment && webl.comment.toLowerCase(); // comment is optional
+				if( (weblTitle.indexOf(queryStr) >= 0) 
+					|| (weblUrl.indexOf(queryStr) >= 0)
+					|| (weblComment && weblComment.indexOf(queryStr) >= 0) ) {
 					matches.push(webl);
 				}
 			}
