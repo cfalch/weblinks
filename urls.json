@@ -242,6 +242,16 @@
       {
         "title": "I/S Work Assignments",
         "url": "http://sharepoint/teams/itresmgmt/Lists/Work%20Assignments/AllItems.aspx"
+      },
+      {
+        "title": "Java COE",
+        "url": "http://sharepoint/teams/javacoe/SitePages/Home.aspx",
+        "comment": "Java Center of Excellence (Sharepoint)"
+      },
+      {
+        "title": "Mobile COE",
+        "url": "http://sharepoint/teams/mobilecoe",
+        "comment": "Mobile Center of Excellence (Sharepoint)"
       }
     ]
   },
