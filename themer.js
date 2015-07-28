@@ -1,10 +1,14 @@
 
-function setTheme(aTheme) {
-	if(aTheme === 'bluish') {
+/**
+ * Until there's a UI feature to select a theme, use the browser's console to execute
+ * > setTheme('themeName')
+ */
+function setTheme(themeName) {
+	if(themeName === 'bluish') {
 		changeTheme("linkGroupBody", "linkGroup");
-	} else if (aTheme === 'clean') {
+	} else if (themeName === 'clean') {
 		changeTheme("linkGroup2Body", "linkGroup2");
-	} else if (aTheme === 'dark') {
+	} else if (themeName === 'dark') {
 		changeTheme("linkGroupGlowBody", "linkGroupGlow");
 	}
 }
