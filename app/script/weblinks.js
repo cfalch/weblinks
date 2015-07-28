@@ -29,7 +29,7 @@
 			jsonData = linksApp.groups;
 			jsonFrom = LOCAL_STG;
 		} else {
-			$http.get('urls.json').success(function(data) {
+			$http.get('app/data/urls.json').success(function(data) {
 				jsonData = data;
 				linksApp.groups = data;
 				jsonFrom = DISK;
@@ -45,7 +45,7 @@
 		this.linkToAdd = {};
 		this.addLink = function(group) {
 			group.links.push(this.linkToAdd);
-			$http.post('urls.json', linksApp.groups).success(function(data) {
+			$http.post('app/data/urls.json', linksApp.groups).success(function(data) {
 				$log.info('Saved urls.json!');
 			}).error(function(data) {
 				$log.error('DID NOT SAVE!');
@@ -68,7 +68,7 @@
 	app.directive("displaySearch", function() {
 		return {
 			restrict: 'E',
-			templateUrl: 'display-search.html',
+			templateUrl: 'app/views/display-search.html',
 			controller: 'SearchController'
 		};
 	})
@@ -76,7 +76,7 @@
 	app.directive("displayWeblinks", function() {
 		return {
 			restrict: 'E',
-			templateUrl: 'display-weblinks.html',
+			templateUrl: 'app/views/display-weblinks.html',
 			controller: 'LinkController'
 		};
 	});
@@ -84,7 +84,7 @@
 	app.directive("jsonDataControls", function() {
 		return {
 			restrict: 'E',
-			templateUrl: 'json-data-controls.html',
+			templateUrl: 'app/views/json-data-controls.html',
 			controller: function() {
 				this.isJsonFromLocalStorage = function() {
 					return jsonFrom === LOCAL_STG;
