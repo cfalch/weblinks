@@ -2,7 +2,7 @@
 	<div class="row">
 		<section class="col-sm-6 col-md-4"
 			ng-show="searchResults.length > 0 && linkGroup.groupName != 'Certes'"
-			ng-repeat="linkGroup in linkCtrl.groups | orderBy:'links.length'">
+			ng-repeat="linkGroup in linkCtrl.groups | orderBy:'groupName'">
 			<!--Each group is hidden if the search query filters all results. 'searchResults' is 
 			defined in the ng-repeat BELOW for weblinks in this group -->
 			<div name="link-group" class="{{linkCtrl.getThemeClassName()}}">
