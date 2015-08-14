@@ -5,6 +5,7 @@
         <!--Each group is hidden if the search query filters all results. 'searchResults' is 
         defined in the ng-repeat BELOW for weblinks in this group -->
         <div name="link-group" class="{{linkCtrl.getThemeClassName()}}">
+        <ul class="pageBreakForFirefox"><li>
             <h3>{{linkGroup.groupName}}
             <a href="" ng-click="linkCtrl.setEditing(linkGroup.groupName)" title="Add a link in {{linkGroup.groupName}}"
                 class="addLink" tabindex="-1">
@@ -20,6 +21,7 @@
                     <span class="comment" ng-show="{{link.comment.length > 0}}">-- {{link.comment}}</span>
                 </li>
             </ul>
+        </li></ul>
         </div>
         <div ng-show="linkCtrl.isEditing(linkGroup.groupName)">
             <form name="addForm"

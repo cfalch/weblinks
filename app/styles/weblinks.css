@@ -33,23 +33,29 @@ ul, li {
     /* border-bottom: 15px solid #fff; */ /* Border overlaps the search input */
 }
 
+/* Instead of the Bootstrap grid system, how about CSS3 columns? --> */
 .webl-container {
-  margin: 2em;
+    -moz-columns: 40em;
+    -webkit-columns: 40em;
+    columns: 40em;
 
-  -moz-columns: 40em;
-  -webkit-columns: 40em;
-  columns: 40em;
-
-  -moz-column-gap: 2em;
-  -webkit-column-gap: 2em;
-  column-gap: 2em;
+    -moz-column-gap: 2em;
+    -webkit-column-gap: 2em;
+    column-gap: 2em;
 }
-
 .webl-group {
-  -webkit-column-break-inside: avoid;
-  page-break-inside: avoid;
-  /* Firefox is dumb */
-  break-inside: avoid;
+    padding: 5px 20px;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+.webl-group .pageBreakForFirefox {
+    margin: 0;
+    -webkit-column-break-inside: avoid; /* Chrome, Safari */
+    page-break-inside: avoid;           /* Theoretically FF 20+ */
+    break-inside: avoid;         /* IE 11 */
+    display:table;
+    width: 100%;
 }
 
 .aWeblink {
@@ -102,7 +108,7 @@ ul, li {
 }
 #searchDiv {
 	text-align: right;
-	margin: 2px 15px;
+	margin: 10px 20px;
 	padding-bottom: 3px;
     height: 34px;
     /* The search input from bootstrap is 34px. No idea if this is dynamic. 
@@ -111,6 +117,13 @@ ul, li {
     in css. I don't know why it happens, but I'm guessing that adding this fixed height
     is a BAD IDEA.
     */
+}
+.search-icon {
+    position: absolute;
+    right: 40px;
+    top: 49px;
+    font-size: 1.5em;
+    color: #555;
 }
 .noResults {
     padding: 10px 0;
@@ -211,6 +224,9 @@ ul, li {
 }
 .linkGroupGlowBody #searchDiv input {
    
+}
+.linkGroupGlowBody .search-icon {
+    color: #777;
 }
 .linkGroupGlow .addLink {
     /* Won't be needed once linkGroup(1) removes the addLink image */
