@@ -2,7 +2,8 @@
 	<form name="searchForm" role="form" class="form-inline" ng-submit="searchCtrl.gotoSingleWeblink()">
 	<div class="form-group">
 		<input type="search" name="searchInput" class="form-control"
-			placeholder="Search Weblinks" ng-model="searchCtrl.queryStr.data">
+			placeholder="Search Weblinks" ng-model="searchCtrl.queryStr.data"
+            clear-with-esc>
 	</div>
 	</form>
 </div>

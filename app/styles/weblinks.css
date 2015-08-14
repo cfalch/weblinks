@@ -50,7 +50,6 @@ ul, li {
   page-break-inside: avoid;
   /* Firefox is dumb */
   break-inside: avoid;
-  white-space: nowrap;
 }
 
 .aWeblink {
@@ -163,11 +162,6 @@ ul, li {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     margin-bottom: 10px;
     padding: 12px 16px;
-    /* After switching from bootstrap to column layout, had issues with searching. When there was only 1 resulting group,
-    the container spanned all available columns. Imagine 1 group with 1 link (search result) that spanned all 4 columns! 
-    The following prevents this. */
-    display: inline-block;
-    width: 100%;
 }
 .linkGroup2 h3 {
     font: bold 1.9em Candara;
