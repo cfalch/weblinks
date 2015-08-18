@@ -116,19 +116,41 @@
 	};
 	**/
 
+	/**
+	 * Sets focus in the selected input
+	 */
+	app.directive('autofocus', ['$timeout', function($timeout) {
+		return {
+			restrict: 'A',
+			link: function($scope, $element) {
+				$timeout(function() {
+					$element[0].focus();
+				});
+			}
+		}
+	}]);
+
+
 	/* 	
 	 * Clears the form input with the ESC key.
 	 * This modifies the behavior of the browser, which I'm generally against, but this is a 
 	 * convenience jsut for me, so I'll allow it ;-) 
 	 */
+/* !!
+	Works in Chrome
+	Works in IE11
+	DOES NOT work in Firefox
+   !!
+*/
 	app.directive('clearWithEsc', function() {
 	    return {
 	        restrict: 'A',
 	        require: '?ngModel',
 	        link: function(scope, element, attrs, controller) {
 	            element.on('keydown', function(ev) {
-	                if (ev.keyCode != 27) return;
-
+	                if (ev.keyCode != 27) {
+	                	return;
+					}
 	                scope.$apply(function() {
 	                    controller.$setViewValue("");
 	                    controller.$render();
