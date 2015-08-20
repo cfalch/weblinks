@@ -1,4 +1,4 @@
-During POST from WebLinks.js:
+POST from WebLinks.js:
 
 	IE10 logs: 
 	"SCRIPT7002: XMLHttpRequest: Network Error 0x2ef3, Could not complete the operation due to error 00002ef3.
@@ -65,5 +65,3 @@ if (!toggled) {
   }
 }
 ====================================================
-
-test
