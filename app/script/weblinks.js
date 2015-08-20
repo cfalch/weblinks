@@ -144,16 +144,18 @@
 */
 	app.directive('clearWithEsc', function() {
 	    return {
-	        restrict: 'A',
 	        require: '?ngModel',
 	        link: function(scope, element, attrs, controller) {
-	            element.on('keydown', function(ev) {
-	                if (ev.keyCode != 27) {
+	            element.on('keydown keyup', function(event) {
+	            	/* Firefox resets the control to its original value on keyup. So
+	            	   listening on keydown ONLY works for Chrome/IE, but not for Ffox. */
+	                if (event.keyCode != 27) {
 	                	return;
 					}
 	                scope.$apply(function() {
-	                    controller.$setViewValue("");
+	                    controller.$setViewValue('');
 	                    controller.$render();
+	                    event.preventDefault();
 	                });
 	            });
 	        },
