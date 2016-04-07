@@ -210,6 +210,18 @@
 		return matches;
 	};
 
+	app.directive("themeSwitcher", function() {
+		return {
+			restrict: 'E',
+			templateUrl: 'app/views/theme-switcher.html',
+			controller: function() {
+				this.set = function(themeName) {
+					setTheme(themeName);
+				}
+			}, controllerAs: 'themeCtrl'
+		};
+	});
+
 })();
 
 // TODO: Figure out why IE caches so aggressively. See if I can't refactor our a dataRefresh()
