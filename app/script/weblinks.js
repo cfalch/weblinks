@@ -2,6 +2,7 @@
 	var app = angular.module('weblinks', []);
 
 	var jsonData = [];
+	var filteredLinks = [];
 	var jsonFrom = ""; // Keeps track of source for jsonData
 	var LOCAL_STG = "localstorage";
 	var DISK = "disk";
@@ -14,9 +15,8 @@
 	app.controller('SearchController', function(QueryString) {
 		this.queryStr = QueryString;
 		this.gotoSingleWeblink = function() {
-			var matches = app.getFilteredLinks(this.queryStr.data, jsonData);
-			if(matches.length == 1) {
-				window.location = matches[0].url;
+			if(filteredLinks.length == 1) {
+				window.location = filteredLinks[0].url;
 			}
 		};
 	});
@@ -61,7 +61,7 @@
 			return getThemeClass();
 		};
 		this.getFilteredLinks = function() {
-			return app.getFilteredLinks(this.queryStr.data, linksApp.groups);
+			return filteredLinks;
 		};
 	}]);
 
@@ -187,28 +187,50 @@
 		}
 	};
 
-	app.getFilteredLinks = function(queryString, groups) {
-		// I'm pretty much re-implementing the filter that's already run in the page. I couldn't figure
-		// out how to combine the filter results from EACH GROUP in order to tally up the search results
-		// to see if there were no matches in any group.
+	app.getFilteredGroups = function(queryString, groups) {
 		var queryStr = queryString.toLowerCase();
 		var matches = [];
 		for(var i = 0; i < groups.length; i++) {
-			var group = groups[i];
-			for(var j = 0; j < group.links.length; j++) {
-				var webl = group.links[j];
-				var weblTitle = webl.title.toLowerCase(); // title is required
-				var weblUrl = webl.url.toLowerCase(); // url is required
-				var weblComment = webl.comment && webl.comment.toLowerCase(); // comment is optional
-				if( (weblTitle.indexOf(queryStr) >= 0) 
-					|| (weblUrl.indexOf(queryStr) >= 0)
-					|| (weblComment && weblComment.indexOf(queryStr) >= 0) ) {
-					matches.push(webl);
+			var group = group[i];
+			var groupName = group.groupName.toLowerCase(); // name??
+			if(groupName.indexOf(queryStr) >= 0) {
+				// Return all links within group as matches
+				for(var j = 0; j < group.links.length; j++) {
+					matches.push(group.links[j]);
 				}
 			}
 		}
-		return matches;
-	};
+	}
+
+	app.filter('linkFilter', function($filter) {
+		return function(items, search) {
+			var matches = items;
+			if(search.indexOf("h:") !== 0) { // Don't filter when searchStr starts with 'h:'
+				matches = $filter('filter')(items, search); // exec angular's filter
+			}
+			filteredLinks = matches;
+			return matches;
+		};
+	});
+
+	app.filter('groupFilter', function($filter) {
+		return function(items, search) {
+			var matches = items;
+			if(search.indexOf("h:") === 0) {
+				search = search.substring(2); // strips 'h:'
+				matches = [];
+				angular.forEach(items, function(item) {
+					if(item.groupName.toLowerCase().indexOf(search.toLowerCase()) >= 0) {
+						matches.push(item);
+					}
+				});
+			} else {
+				matches = $filter('linkFilter')(items, search);
+			}
+			filteredLinks = matches;
+			return matches;
+		};
+	});
 
 	app.directive("themeSwitcher", function() {
 		return {
