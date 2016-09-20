@@ -2,21 +2,31 @@
 	var app = angular.module('weblinks', []);
 
 	var jsonData = [];
-	var filteredLinks = [];
 	var jsonFrom = ""; // Keeps track of source for jsonData
 	var LOCAL_STG = "localstorage";
 	var DISK = "disk";
 
 	// To share between linkCtrl and searchCtrl
-	app.factory('QueryString', function() {
-		return {data:""}; // The text of the search filter
+	app.factory('QueryString', function($filter) {
+		return {
+			data: "", // The text of the search filter
+			getFilteredLinks: getFilteredLinks
+		}; 
+		function getFilteredLinks() {
+			var allLinks = [];
+			angular.forEach(jsonData, function(group) {
+				allLinks = allLinks.concat(group.links)
+			});
+			return $filter('filter')(allLinks, this.data); // exec angular's filter
+		}
 	});
 
 	app.controller('SearchController', function(QueryString) {
 		this.queryStr = QueryString;
 		this.gotoSingleWeblink = function() {
-			if(filteredLinks.length == 1) {
-				window.location = filteredLinks[0].url;
+			var matches = QueryString.getFilteredLinks();
+			if(matches.length === 1) {
+				window.location = matches[0].url;
 			}
 		};
 	});
@@ -61,7 +71,7 @@
 			return getThemeClass();
 		};
 		this.getFilteredLinks = function() {
-			return filteredLinks;
+			return QueryString.getFilteredLinks();
 		};
 	}]);
 
@@ -202,13 +212,16 @@
 		}
 	}
 
+	/**
+	 * Filters links for a single group. Since 'matches' represents filtered links only for this group,
+	 * we can't use it for determining how many total page matches result.
+	 */
 	app.filter('linkFilter', function($filter) {
 		return function(items, search) {
 			var matches = items;
 			if(search.indexOf("h:") !== 0) { // Don't filter when searchStr starts with 'h:'
 				matches = $filter('filter')(items, search); // exec angular's filter
 			}
-			filteredLinks = matches;
 			return matches;
 		};
 	});
@@ -227,7 +240,6 @@
 			} else {
 				matches = $filter('linkFilter')(items, search);
 			}
-			filteredLinks = matches;
 			return matches;
 		};
 	});
