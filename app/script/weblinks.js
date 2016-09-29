@@ -1,5 +1,5 @@
 (function() {
-	var app = angular.module('weblinks', []);
+	var app = angular.module('weblinks', ['ngclipboard']);
 
 	var jsonData = [];
 	var jsonFrom = ""; // Keeps track of source for jsonData
@@ -111,6 +111,10 @@
 						jsonFrom = DISK;
 					}
 				};
+				this.copySuccess = function(e) {
+					alert(e.action + "; " + e.trigger);
+					e.clearSelection();
+				}
 			}, controllerAs: 'dataCtrl'
 		};
 	});
