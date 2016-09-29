@@ -95,7 +95,8 @@
 		return {
 			restrict: 'E',
 			templateUrl: 'app/views/json-data-controls.html',
-			controller: function() {
+			controller: function($timeout) {
+				this.copyClicked = false;
 				this.isJsonFromLocalStorage = function() {
 					return jsonFrom === LOCAL_STG;
 				};
@@ -112,8 +113,12 @@
 					}
 				};
 				this.copySuccess = function(e) {
-					alert(e.action + "; " + e.trigger);
+					var self = this; // for $timeout closure
 					e.clearSelection();
+					this.copyClicked = true; // Allows ng-class to add the animation class
+					$timeout(function() {
+						self.copyClicked = false; // Allows ng-class to remove the animation class
+					}, 2000);
 				}
 			}, controllerAs: 'dataCtrl'
 		};

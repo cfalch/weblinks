@@ -128,6 +128,9 @@ ul, li {
 .noResults {
     padding: 10px 0;
 }
+.modal-footer.after-header {
+    padding-bottom: 0;
+}
 
 /* ---------- link group style 1 ------------------*/
 .linkGroup {
@@ -273,4 +276,9 @@ ul, li {
 .theme-ctrl a {
     cursor: pointer;
     padding: 0 3px;
+}
+
+/* For Animate.css transitions */
+.animated {
+    animation-duration: 2s;
 }
