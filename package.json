@@ -8,6 +8,6 @@
   "devDependencies": {
   },
   "scripts": {
-    "start": "http-server -a localhost -p 7777 -c-1"
+    "start": "http-server -a localhost -p 5309 -c-1"
   }
 }
