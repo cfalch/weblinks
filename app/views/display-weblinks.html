@@ -36,9 +36,11 @@
             </form>
         </div>
     </section>
-    <div ng-show="linkCtrl.getFilteredLinks().length === 0" class="noResults">No Results Found</div>
-    <!-- TODO: Don't call this function if there's nothing in the search input -->
 </main>
+<div class="noResults" ng-controller="LinkController as linkCtrl">
+    <div ng-show="linkCtrl.getFilteredLinks().length === 0" class="gremlin">👹</div>
+    <div ng-show="linkCtrl.getFilteredLinks().length === 0">No Results Found</div>
+</div>
 
 <!-- TODO: Style the 'no results found' for 'bluish' and 'clean' -->
 <!-- TODO: Add a usageCount for each link and increment it when clicked. Style based on usage, to make the links used more often more prevalent -->

@@ -13,11 +13,24 @@
 			getFilteredLinks: getFilteredLinks
 		}; 
 		function getFilteredLinks() {
-			var allLinks = [];
-			angular.forEach(jsonData, function(group) {
-				allLinks = allLinks.concat(group.links)
-			});
-			return $filter('filter')(allLinks, this.data); // exec angular's filter
+			if(!this.data) {
+				return;
+			}
+			if(this.data.indexOf('h:') === 0) {
+				var groups = $filter('groupFilter')(jsonData, this.data);
+				var results = [];
+				angular.forEach(groups, function(group) {
+					results = results.concat(group.links);
+				});
+				return results;
+			} else {
+				var allLinks = [];
+				angular.forEach(jsonData, function(group) {
+					allLinks = allLinks.concat(group.links)
+				});
+				var results = $filter('linkFilter')(allLinks, this.data);
+				return results;
+			}
 		}
 	});
 

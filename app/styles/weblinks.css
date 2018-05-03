@@ -11,7 +11,7 @@ body {
 }
 @media (min-width: 700px) {
     body {
-        font-size: 62.5%
+        font-size: 65%;
     }
 }
 .linkGroupBody {
@@ -131,7 +131,12 @@ ul, li {
     color: #555;
 }
 .noResults {
-    padding: 10px 0;
+    text-align: center;
+    font-size: 18px;
+    padding: 0 0 48px 0;
+}
+.gremlin {
+    font-size: 48px;
 }
 .modal-footer.after-header {
     padding-bottom: 0;
