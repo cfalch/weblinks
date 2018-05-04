@@ -38,7 +38,7 @@
     </section>
 </main>
 <div class="noResults" ng-controller="LinkController as linkCtrl">
-    <div ng-show="linkCtrl.getFilteredLinks().length === 0" class="gremlin">👹</div>
+    <div ng-show="linkCtrl.getFilteredLinks().length === 0" class="gremlin">{{linkCtrl.getGremlin()}}</div>
     <div ng-show="linkCtrl.getFilteredLinks().length === 0">No Results Found</div>
 </div>
 

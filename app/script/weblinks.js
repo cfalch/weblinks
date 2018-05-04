@@ -5,6 +5,17 @@
 	var jsonFrom = ""; // Keeps track of source for jsonData
 	var LOCAL_STG = "localstorage";
 	var DISK = "disk";
+	var gremlin = getARandomGremlin();
+
+	// Grabs a random(ish) glyph for when no results match search. This setup at app bootstrap prevents
+	// the randomize from running at each keystroke.
+	function getARandomGremlin() {
+		var gremlins = [
+			"👹", "😇", "🙃", "🤓", "😱", "😵", "👿", "👺", "💀", "👻", "🙀", "👀",
+			"🐙", "🎃", "👾", "🚧", "⛩", "💣", "🛡", "☠", "🔮", "🗿", "⁉", "🃏"];
+		var randomishIndex = Math.floor(Math.random() * (gremlins.length)) + 0;
+		return gremlins[randomishIndex];
+	}
 
 	// To share between linkCtrl and searchCtrl
 	app.factory('QueryString', function($filter) {
@@ -86,6 +97,9 @@
 		this.getFilteredLinks = function() {
 			return QueryString.getFilteredLinks();
 		};
+		this.getGremlin = function() {
+			return gremlin;
+		}
 	}]);
 
 	app.directive("displaySearch", function() {
