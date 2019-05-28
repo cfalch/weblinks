@@ -5,8 +5,7 @@
   "description": "WebLinks (tm)",
   "repository": "https://github.com/cfalch/weblinks",
   "license": "???",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "http-server -a localhost -p 5309 -c-1"
   }
