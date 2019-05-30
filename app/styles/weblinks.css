@@ -1,18 +1,10 @@
-html {
-    font-size: 16px;
-}
 body {
-    font-size: 100%;
-	margin: 15px 5px;
+    font-size: 12px;
+    margin: 15px 5px;
     /* bootstrap columns come with 15px padding, and this is used to show the 
     gutters between the content. So, I'm adding this 15px as margins on other
     elements instead of in the body. 
     */
-}
-@media (min-width: 700px) {
-    body {
-        font-size: 65%;
-    }
 }
 .linkGroupBody {
 }
@@ -144,6 +136,7 @@ ul, li {
 
 /* ---------- link group style 1 ------------------*/
 .linkGroup {
+    font-size: .8em;
     background-image: linear-gradient(to right bottom, #B6D0D9 0%, #F5F5F5 100%);
     border: 1px solid #999;
     border-radius: 6px 0 20px 0;
@@ -181,7 +174,7 @@ ul, li {
 
 /* ---------- link group style 2 ------------------*/
 .linkGroup2 {
-    font-size: 0.9em;
+    font-size: .8em;
     background-color: #fefdfa;
     border: 1px solid #aab123;
     border-radius: 5px;
@@ -219,6 +212,7 @@ ul, li {
 
 /* ---------- link group style 3 ------------------*/
 .linkGroupGlow {
+    font-size: .8em;
 	box-shadow: 0 0 14px #fff;
 	border-radius: 14px;
 	margin: 14px 0 0 0;
