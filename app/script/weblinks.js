@@ -95,9 +95,9 @@
 			}).error(function(data) {
 				$log.error('DID NOT SAVE!');
 				$log.info(data);
+				saveJsonLocal(linksApp.groups);
+				jsonFrom = LOCAL_STG;
 			});
-			saveJsonLocal(linksApp.groups);
-			jsonFrom = LOCAL_STG;
 			jsonData = linksApp.groups; // Update global var; Shouldn't this already be updated by reference?
 			this.linkToAdd = {};
 			this.setEditing('');

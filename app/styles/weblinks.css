@@ -1,15 +1,15 @@
 body {
     font-size: 12px;
     margin: 15px 5px;
-    /* bootstrap columns come with 15px padding, and this is used to show the 
+    /* bootstrap columns come with 15px padding, and this is used to show the
     gutters between the content. So, I'm adding this 15px as margins on other
-    elements instead of in the body. 
+    elements instead of in the body.
     */
 }
 .linkGroupBody {
 }
 .linkGroup2Body {
-    background: none repeat scroll left top #fcfbf5; 
+    background: none repeat scroll left top #fcfbf5;
 }
 .linkGroupGlowBody {
     background: url('../images/pattern_40.gif');
@@ -108,7 +108,7 @@ ul, li {
 	margin: 10px 20px;
 	padding-bottom: 3px;
     height: 34px;
-    /* The search input from bootstrap is 34px. No idea if this is dynamic. 
+    /* The search input from bootstrap is 34px. No idea if this is dynamic.
     If I don't also set the height of my container, then somehow it gets an extra
     line wrap at its minimum width. This adds more spacing below it than I'm specifying
     in css. I don't know why it happens, but I'm guessing that adding this fixed height
@@ -118,9 +118,12 @@ ul, li {
 .search-icon {
     position: absolute;
     right: 40px;
-    top: 49px;
+    top: 22px;
     font-size: 1.5em;
     color: #555;
+}
+.search-icon.local-storage {
+    top: 49px;
 }
 .noResults {
     text-align: center;
@@ -195,7 +198,7 @@ ul, li {
     text-decoration: none; /* no underline */
 }
 .linkGroup2 .addLink-fa:hover {
-    
+
 }
 .linkGroup2 .aWeblink {
     font-size: 1.6em;
@@ -230,7 +233,7 @@ ul, li {
     font-family: Maiandra GD, MV boli, Tahoma, serif;
 }
 .linkGroupGlowBody #searchDiv input {
-   
+
 }
 .linkGroupGlowBody .search-icon {
     color: #777;
