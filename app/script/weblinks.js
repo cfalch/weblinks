@@ -22,7 +22,7 @@
 		return {
 			data: "", // The text of the search filter
 			getFilteredLinks: getFilteredLinks
-		}; 
+		};
 		function getFilteredLinks() {
 			if(!this.data) {
 				return;
@@ -63,10 +63,15 @@
 			jsonData = linksApp.groups;
 			jsonFrom = LOCAL_STG;
 		} else {
-			$http.get('app/data/urls.json').success(function(data) {
-				jsonData = data;
-				linksApp.groups = data;
-				jsonFrom = DISK;
+			var config = {
+				headers: {'x-api-key': 'eNj8evospb6YHRJhpwvpe540LrGhPtdT5HwslpOw'},
+				params: {'SecretPublicID': 'Professor Falken'}
+			}
+			$http.get('https://7fhx9eq7g5.execute-api.us-east-1.amazonaws.com/default/queryWeblinks', config)
+				.success(function(data) {
+					jsonData = data;
+					linksApp.groups = data;
+					jsonFrom = DISK;
 			});
 		}
 		this.editGroup = "";
@@ -79,8 +84,14 @@
 		this.linkToAdd = {};
 		this.addLink = function(group) {
 			group.links.push(this.linkToAdd);
-			$http.post('app/data/urls.json', linksApp.groups).success(function(data) {
-				$log.info('Saved urls.json!');
+			var config = {
+				headers: {'x-api-key': 'eNj8evospb6YHRJhpwvpe540LrGhPtdT5HwslpOw'},
+				params: {'SecretPublicID': 'Professor Falken'}
+			}
+			// $http.post('app/data/urls.json', linksApp.groups).success(function(data) {
+			$http.put('https://7fhx9eq7g5.execute-api.us-east-1.amazonaws.com/default/putWeblinks', linksApp.groups, config)
+				.success(function(response) {
+					$log.info('Saved urls.json!');
 			}).error(function(data) {
 				$log.error('DID NOT SAVE!');
 				$log.info(data);
@@ -177,10 +188,10 @@
 	}]);
 
 
-	/* 	
+	/*
 	 * Clears the form input with the ESC key.
-	 * This modifies the behavior of the browser, which I'm generally against, but this is a 
-	 * convenience jsut for me, so I'll allow it ;-) 
+	 * This modifies the behavior of the browser, which I'm generally against, but this is a
+	 * convenience jsut for me, so I'll allow it ;-)
 	 */
 /* !!
 	Works in Chrome
