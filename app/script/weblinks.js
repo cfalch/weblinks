@@ -55,7 +55,20 @@
 		};
 	});
 
-	app.controller('LinkController', ['QueryString', '$http', '$log', function(QueryString, $http, $log) {
+	app.controller('LinkController', ['QueryString', '$http', '$log', '$window', function(QueryString, $http, $log, $window) {
+		// 2019-07-28 having problems with $location.search(), so parsing myself...
+		var secretPublicId;
+		if($window.location) {
+			var search = $window.location.search.substring(1);
+			var params = search.split('&');
+			for(var i = 0; i < params.length; i++) {
+				var p = params[i];
+				var splits = p.split('=');
+				if(splits[0] === 'spid') {
+					secretPublicId = splits[1];
+				}
+			}
+		}
 		var linksApp = this;
 		this.queryStr = QueryString;
 		linksApp.groups = loadJsonLocal();
@@ -65,7 +78,7 @@
 		} else {
 			var config = {
 				headers: {'x-api-key': 'eNj8evospb6YHRJhpwvpe540LrGhPtdT5HwslpOw'},
-				params: {'SecretPublicID': 'Professor Falken'}
+				params: {'SecretPublicID': secretPublicId}
 			}
 			$http.get('https://7fhx9eq7g5.execute-api.us-east-1.amazonaws.com/default/queryWeblinks', config)
 				.success(function(data) {
@@ -86,7 +99,7 @@
 			group.links.push(this.linkToAdd);
 			var config = {
 				headers: {'x-api-key': 'eNj8evospb6YHRJhpwvpe540LrGhPtdT5HwslpOw'},
-				params: {'SecretPublicID': 'Professor Falken'}
+				params: {'SecretPublicID': secretPublicId}
 			}
 			// $http.post('app/data/urls.json', linksApp.groups).success(function(data) {
 			$http.put('https://7fhx9eq7g5.execute-api.us-east-1.amazonaws.com/default/putWeblinks', linksApp.groups, config)
