@@ -27,7 +27,7 @@
 			if(!this.data) {
 				return;
 			}
-			if(this.data.indexOf('h:') === 0) {
+			if(this.data.indexOf('/') === 0) { // then search groupName instead of links
 				var groups = $filter('groupFilter')(jsonData, this.data);
 				var results = [];
 				angular.forEach(groups, function(group) {
@@ -279,7 +279,7 @@
 	app.filter('linkFilter', function($filter) {
 		return function(items, search) {
 			var matches = items;
-			if(search.indexOf("h:") !== 0) { // Don't filter when searchStr starts with 'h:'
+			if(search.indexOf("/") !== 0) { // Don't filter when searchStr starts with '/'
 				matches = $filter('filter')(items, search); // exec angular's filter
 			}
 			return matches;
@@ -289,8 +289,8 @@
 	app.filter('groupFilter', function($filter) {
 		return function(items, search) {
 			var matches = items;
-			if(search.indexOf("h:") === 0) {
-				search = search.substring(2); // strips 'h:'
+			if(search.indexOf("/") === 0) {
+				search = search.substring(1); // strips leading '/'
 				matches = [];
 				angular.forEach(items, function(item) {
 					if(item.groupName.toLowerCase().indexOf(search.toLowerCase()) >= 0) {
