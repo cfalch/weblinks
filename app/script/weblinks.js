@@ -17,6 +17,15 @@
 		return gremlins[randomishIndex];
 	}
 
+	function parseSpid($window) {
+		var secretPublicId;
+		if($window.location) {
+			var searchParams = new URLSearchParams($window.location.search);
+			secretPublicId = searchParams.get('spid');
+		}
+		return secretPublicId;
+	}
+
 	// To share between linkCtrl and searchCtrl
 	app.factory('QueryString', function($filter) {
 		return {
@@ -55,20 +64,10 @@
 		};
 	});
 
-	app.controller('LinkController', ['QueryString', '$http', '$log', '$window', function(QueryString, $http, $log, $window) {
+	app.controller('LinkController', ['QueryString', '$http', '$log', '$window', '$scope', function(QueryString, $http, $log, $window, $scope) {
 		// 2019-07-28 having problems with $location.search(), so parsing myself...
-		var secretPublicId;
-		if($window.location) {
-			var search = $window.location.search.substring(1);
-			var params = search.split('&');
-			for(var i = 0; i < params.length; i++) {
-				var p = params[i];
-				var splits = p.split('=');
-				if(splits[0] === 'spid') {
-					secretPublicId = splits[1];
-				}
-			}
-		}
+		var secretPublicId = parseSpid($window);
+		$scope.secretPublicId = secretPublicId;
 		var linksApp = this;
 		this.queryStr = QueryString;
 		linksApp.groups = loadJsonLocal();
@@ -116,7 +115,7 @@
 			this.setEditing('');
 		};
 		this.getThemeClassName = function() {
-			return getThemeClass();
+			return getThemeClass(secretPublicId);
 		};
 		this.getFilteredLinks = function() {
 			return QueryString.getFilteredLinks();
@@ -304,13 +303,13 @@
 		};
 	});
 
-	app.directive("themeSwitcher", function() {
+	app.directive('themeSwitcher', function() {
 		return {
 			restrict: 'E',
 			templateUrl: 'app/views/theme-switcher.html',
-			controller: function() {
+			controller: function($scope) {
 				this.set = function(themeName) {
-					setTheme(themeName);
+					setTheme(themeName, $scope.secretPublicId);
 				}
 			}, controllerAs: 'themeCtrl'
 		};
