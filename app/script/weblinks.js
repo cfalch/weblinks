@@ -73,7 +73,7 @@
 		linksApp.groups = loadJsonLocal();
 		if (linksApp.groups.length > 0) {
 			jsonData = linksApp.groups;
-			jsonFrom = LOCAL_STG;
+			// jsonFrom = LOCAL_STG;  // This controls the buttons in json-data-controls.html which I don't use anymore, since hosting on aws
 		} else {
 			var config = {
 				headers: { 'x-api-key': 'eNj8evospb6YHRJhpwvpe540LrGhPtdT5HwslpOw' },
@@ -101,6 +101,7 @@
 				headers: { 'x-api-key': 'eNj8evospb6YHRJhpwvpe540LrGhPtdT5HwslpOw' },
 				params: { 'SecretPublicID': secretPublicId }
 			}
+			// Save to server
 			// $http.post('app/data/urls.json', linksApp.groups).success(function(data) {
 			$http.put('https://7fhx9eq7g5.execute-api.us-east-1.amazonaws.com/default/putWeblinks', linksApp.groups, config)
 				.success(function (response) {
@@ -110,6 +111,8 @@
 					$log.info(data);
 					jsonFrom = LOCAL_STG; // This should hopefully never happen, but if it does, it'll show the icon on the page alerting me of an issue saving
 				});
+			// Save to localStorage
+			saveJsonLocal(linksApp.groups);
 
 			jsonData = linksApp.groups; // Update global var; Shouldn't this already be updated by reference?
 			this.linkToAdd = {};
@@ -244,6 +247,7 @@
 	};
 
 	var saveJsonLocal = function (jsonToWrite) {
+		console.log('saving JSON to localStorage (length=' + JSON.stringify(jsonToWrite).length + ')');
 		if (typeof (Storage) !== "undefined") {
 			window.localStorage.setItem("weblinks-json", angular.toJson(jsonToWrite, true)); // pretty-print
 		} else {
