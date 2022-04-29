@@ -73,7 +73,7 @@
 		linksApp.groups = loadJsonLocal();
 		if (linksApp.groups.length > 0) {
 			jsonData = linksApp.groups;
-			// jsonFrom = LOCAL_STG;  // This controls the buttons in json-data-controls.html which I don't use anymore, since hosting on aws
+			jsonFrom = LOCAL_STG;
 		} else {
 			var config = {
 				headers: { 'x-api-key': 'eNj8evospb6YHRJhpwvpe540LrGhPtdT5HwslpOw' },
@@ -145,12 +145,17 @@
 		};
 	});
 
-	app.directive("jsonDataControls", function () {
+	app.directive("jsonDataControls", ["$log", function ($log) {
 		return {
 			restrict: 'E',
 			templateUrl: 'app/views/json-data-controls.html',
 			controller: function ($timeout) {
 				this.copyClicked = false;
+				this.localStorageModalEnabled = function () {
+					// Disabling since moving to AWS, I don't need the functionality the modal gave me, mainly
+					// the ability to copy the JSON in order to manually update the json data file.
+					return false;
+				};
 				this.isJsonFromLocalStorage = function () {
 					return jsonFrom === LOCAL_STG;
 				};
@@ -164,6 +169,7 @@
 					if (typeof (Storage) != "undefined") {
 						window.localStorage.removeItem("weblinks-json");
 						jsonFrom = DISK;
+						$log.info('Removed weblinks-json from local storage');
 					}
 				};
 				this.copySuccess = function (e) {
@@ -176,7 +182,7 @@
 				}
 			}, controllerAs: 'dataCtrl'
 		};
-	});
+	}]);
 
 	/** Can't seem to get this to work, do the asynchronous nature of the callback
 	var getWeblinks = function($http) {

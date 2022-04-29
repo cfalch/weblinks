@@ -37,10 +37,11 @@
         </div>
     </section>
 </main>
-<div class="noResults" ng-controller="LinkController as linkCtrl">
-    <div ng-show="linkCtrl.getFilteredLinks().length === 0" class="gremlin">{{linkCtrl.getGremlin()}}</div>
-    <div ng-show="linkCtrl.getFilteredLinks().length === 0">No Results Found</div>
+<div class="noResults" ng-show="linkCtrl.getFilteredLinks().length === 0" ng-controller="LinkController as linkCtrl">
+    <div class="gremlin">{{linkCtrl.getGremlin()}}</div>
+    <div>No Results Found</div>
 </div>
+<a href="javascript:void(0);" title="Nuke local storage" ng-show="dataCtrl.isJsonFromLocalStorage()" ng-click="dataCtrl.clearJsonLocal()" class="gremlin grey">🌀</a>
 
 <!-- TODO: Style the 'no results found' for 'bluish' and 'clean' -->
 <!-- TODO: Add a usageCount for each link and increment it when clicked. Style based on usage, to make the links used more often more prevalent -->

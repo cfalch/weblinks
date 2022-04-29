@@ -133,6 +133,13 @@ ul, li {
 .gremlin {
     font-size: 48px;
 }
+.gremlin:hover {
+    text-decoration: none;
+}
+.grey {
+    -webkit-filter: grayscale(50%);
+    filter: grayscale(50%);
+}
 .modal-footer.after-header {
     padding-bottom: 0;
 }

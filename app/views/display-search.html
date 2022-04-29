@@ -4,7 +4,9 @@
 		<input type="search" name="searchInput" class="form-control"
 			placeholder="Search Weblinks" ng-model="searchCtrl.queryStr.data"
             autofocus clear-with-esc>
-        <span class="fa fa-search search-icon" ng-class="{'local-storage': dataCtrl.isJsonFromLocalStorage()}"></span>
+        <span class="fa fa-search search-icon"
+					ng-class="{'local-storage': dataCtrl.isJsonFromLocalStorage() && dataCtrl.localStorageModalEnabled()}"><!-- crazily, this seems to be for alighment -->
+				</span>
 	</div>
 	</form>
 </div>
