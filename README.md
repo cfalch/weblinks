@@ -1,3 +1,22 @@
+## GitHub credentials
+Use a simple access key configure in the repository locally. Once configured, you don't ned to type userid or password to push to the repo, however it does require you to have an active, non-expired access key configured. To do so:
+
+- Log into Git Hub
+- click on user icon (top right corner)
+- Settings > Developer settings
+- Personal Access Tokens
+- Generate new token, with:
+  - **note**: 'to push to weblinks' (or whatever)
+  - **expiration**: 7 days (or whatever)
+  - **scopes**: 'repo' (the first choice)
+- copy the resulting key
+
+Open the file /weblinks/.git/config, then under [remote "origin"] update the secret in 'url':
+
+  `url = https://cfalch:<<secret>>@github.com ...`
+
+Then a normal `git push` should succeed.
+
 ## AWS objects
 ### DynamoDB
 | Table Name | ARN |
@@ -7,7 +26,7 @@
 ### Lambda
 
 Created 2 lambdas having:
-* Runtime: Node.js 10.x,
+* Runtime: Node.js 10.x, (updated to 14.x Apr 2022)
 * Permissions: Create a new role with basic Lambda permissions
 
 | Function Name | ARN | Execution Role |
