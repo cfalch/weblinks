@@ -54,6 +54,69 @@
 		}
 	});
 
+	app.factory('JsonFactory', ["$window", "$http", "$log", function ($window, $http, $log) {
+		var AWS_ENDPT = 'https://7fhx9eq7g5.execute-api.us-east-1.amazonaws.com/default';
+		var AWS_APIKEY = 'eNj8evospb6YHRJhpwvpe540LrGhPtdT5HwslpOw';
+		function localStg() {
+			$log.info('in JsonFactory.localStg()');
+			jsonData = loadJsonLocal();
+			jsonFrom = LOCAL_STG;
+			return jsonData;
+		};
+		function load() {
+			return new Promise((resolve) => {
+				$log.info('in JsonFactory.load()');
+				// Apr 2022 - I spent hours trying to eliminate the dup calls to the backend, and whenever I
+				// was able to do so, I couldn't get the page to update properly. All I was doing was
+				// setting a simple boolean on 'this' (the factory), like so:
+				// if (this.isLoading) {
+				//  resolve(jsonData)
+				// } else {
+				// 	this.isLoading = true
+				//  $http.get(...).success(function (data) {
+				//    ...
+				//  	this.isLoading = false;
+				//  });
+				// There were no errors in the console, and it loaded the results from localStorage fine, but
+				// it wouldn't update with the server data when this checking was in place.
+				var secretPublicId = parseSpid($window);
+				var config = {
+					headers: { 'x-api-key': AWS_APIKEY },
+					params: { 'SecretPublicID': secretPublicId }
+				}
+				$http.get(AWS_ENDPT + '/queryWeblinks', config)
+					.success(function (data) {
+						jsonData = data;
+						jsonFrom = DISK;
+						saveJsonLocal(jsonData);
+						resolve(jsonData);
+					});
+			});
+		};
+		function save(updatedJson) {
+			var secretPublicId = parseSpid($window);
+			return new Promise((resolve, reject) => {
+				var secretPublicId = parseSpid($window);
+				var config = {
+					headers: { 'x-api-key': AWS_APIKEY },
+					params: { 'SecretPublicID': secretPublicId }
+				}
+				$http.put(AWS_ENDPT + '/putWeblinks', updatedJson, config)
+					.success(function (response) {
+						jsonData = updatedJson;
+						saveJsonLocal(updatedJson);
+						resolve();
+					}).error(function (data) {
+						$log.error('DID NOT SAVE!');
+						alert('DID NOT SAVE');
+						$log.info(data);
+						reject();
+					});
+			});
+		};
+		return { localStg, load, save };
+	}]);
+
 	app.controller('SearchController', function (QueryString) {
 		this.queryStr = QueryString;
 		this.gotoSingleWeblink = function () {
@@ -64,29 +127,33 @@
 		};
 	});
 
-	app.controller('LinkController', ['QueryString', '$http', '$log', '$window', '$scope', function (QueryString, $http, $log, $window, $scope) {
-		// 2019-07-28 having problems with $location.search(), so parsing myself...
+	app.controller('GremlinController', ['QueryString', function (QueryString) {
+		this.getFilteredLinks = function () {
+			return QueryString.getFilteredLinks();
+		};
+		this.getGremlin = function () {
+			return gremlin;
+		}
+	}]);
+
+	app.controller('LinkController', ['JsonFactory', 'QueryString', '$http', '$log', '$window', '$scope', function (JsonFactory, QueryString, $http, $log, $window, $scope) {
+		this.queryStr = QueryString;
 		var secretPublicId = parseSpid($window);
 		$scope.secretPublicId = secretPublicId;
-		var linksApp = this;
-		this.queryStr = QueryString;
-		linksApp.groups = loadJsonLocal();
-		if (linksApp.groups.length > 0) {
-			jsonData = linksApp.groups;
-			jsonFrom = LOCAL_STG;
-		} else {
-			var config = {
-				headers: { 'x-api-key': 'eNj8evospb6YHRJhpwvpe540LrGhPtdT5HwslpOw' },
-				params: { 'SecretPublicID': secretPublicId }
-			}
-			$http.get('https://7fhx9eq7g5.execute-api.us-east-1.amazonaws.com/default/queryWeblinks', config)
-				.success(function (data) {
-					jsonData = data;
-					linksApp.groups = data;
-					jsonFrom = DISK;
-					saveJsonLocal(jsonData);
-				});
-		}
+
+		// 1. Load from local storage for immediate display of links
+		this.groups = JsonFactory.localStg();
+
+		// 2. Immediately fetch from server to update page with persisted data
+		JsonFactory.load().then(jsonResult => {
+			$log.info('setting results from server fetch... length = ' + JSON.stringify(jsonResult).length);
+			this.groups = jsonResult;
+			$scope.$apply(() => {
+				this.groups = jsonResult;
+			});
+			$scope.$digest();
+		});
+
 		this.editGroup = "";
 		this.isEditing = function (groupName) {
 			return groupName == this.editGroup;
@@ -94,39 +161,19 @@
 		this.setEditing = function (groupName) {
 			this.editGroup = groupName;
 		};
+
 		this.linkToAdd = {};
 		this.addLink = function (group) {
 			group.links.push(this.linkToAdd);
-			var config = {
-				headers: { 'x-api-key': 'eNj8evospb6YHRJhpwvpe540LrGhPtdT5HwslpOw' },
-				params: { 'SecretPublicID': secretPublicId }
-			}
-			// Save to server
-			// $http.post('app/data/urls.json', linksApp.groups).success(function(data) {
-			$http.put('https://7fhx9eq7g5.execute-api.us-east-1.amazonaws.com/default/putWeblinks', linksApp.groups, config)
-				.success(function (response) {
-					$log.info('Saved urls.json!');
-				}).error(function (data) {
-					$log.error('DID NOT SAVE!');
-					$log.info(data);
-					jsonFrom = LOCAL_STG; // This should hopefully never happen, but if it does, it'll show the icon on the page alerting me of an issue saving
-				});
-			// Save to localStorage
-			saveJsonLocal(linksApp.groups);
-
-			jsonData = linksApp.groups; // Update global var; Shouldn't this already be updated by reference?
-			this.linkToAdd = {};
-			this.setEditing('');
+			JsonFactory.save(this.groups).then(() => {
+				this.linkToAdd = {};
+				this.setEditing('');
+				$scope.$apply();
+			});
 		};
 		this.getThemeClassName = function () {
 			return getThemeClass(secretPublicId);
 		};
-		this.getFilteredLinks = function () {
-			return QueryString.getFilteredLinks();
-		};
-		this.getGremlin = function () {
-			return gremlin;
-		}
 	}]);
 
 	app.directive("displaySearch", function () {
@@ -253,7 +300,6 @@
 	};
 
 	var saveJsonLocal = function (jsonToWrite) {
-		console.log('saving JSON to localStorage (length=' + JSON.stringify(jsonToWrite).length + ')');
 		if (typeof (Storage) !== "undefined") {
 			window.localStorage.setItem("weblinks-json", angular.toJson(jsonToWrite, true)); // pretty-print
 		} else {

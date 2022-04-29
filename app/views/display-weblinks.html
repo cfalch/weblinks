@@ -2,7 +2,7 @@
     <section class="webl-group"
         ng-show="searchResults.length > 0 && linkGroup.groupName != 'Certes'"
         ng-repeat="linkGroup in linkCtrl.groups | orderBy:'groupName' | groupFilter:linkCtrl.queryStr.data as fltrdLinks">
-        <!--Each group is hidden if the search query filters all results. 'searchResults' is 
+        <!--Each group is hidden if the search query filters all results. 'searchResults' is
         defined in the ng-repeat BELOW for weblinks in this group -->
         <div name="link-group" class="{{linkCtrl.getThemeClassName()}}">
         <ul class="pageBreakForFirefox"><li>
@@ -15,7 +15,7 @@
             </a>
             </h3>
             <ul>
-                <li class="aWeblink" 
+                <li class="aWeblink"
                     ng-repeat="link in linkGroup.links | orderBy:'title' | linkFilter:linkCtrl.queryStr.data as searchResults">
                     <a href="{{link.url}}">{{link.title}}</a>
                     <span class="comment" ng-show="{{link.comment.length > 0}}">&mdash; {{link.comment}}</span>
@@ -37,8 +37,8 @@
         </div>
     </section>
 </main>
-<div class="noResults" ng-show="linkCtrl.getFilteredLinks().length === 0" ng-controller="LinkController as linkCtrl">
-    <div class="gremlin">{{linkCtrl.getGremlin()}}</div>
+<div class="noResults" ng-show="gremlinCtrl.getFilteredLinks().length === 0" ng-controller="GremlinController as gremlinCtrl">
+    <div class="gremlin">{{gremlinCtrl.getGremlin()}}</div>
     <div>No Results Found</div>
 </div>
 <a href="javascript:void(0);" title="Nuke local storage" ng-show="dataCtrl.isJsonFromLocalStorage()" ng-click="dataCtrl.clearJsonLocal()" class="gremlin grey">🌀</a>
