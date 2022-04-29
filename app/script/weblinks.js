@@ -58,14 +58,14 @@
 		var AWS_ENDPT = 'https://7fhx9eq7g5.execute-api.us-east-1.amazonaws.com/default';
 		var AWS_APIKEY = 'eNj8evospb6YHRJhpwvpe540LrGhPtdT5HwslpOw';
 		function localStg() {
-			$log.info('in JsonFactory.localStg()');
+			$log.info('JsonFactory :: loading from local storage');
 			jsonData = loadJsonLocal();
 			jsonFrom = LOCAL_STG;
 			return jsonData;
 		};
 		function load() {
 			return new Promise((resolve) => {
-				$log.info('in JsonFactory.load()');
+				$log.info('JsonFactory :: loading from server');
 				// Apr 2022 - I spent hours trying to eliminate the dup calls to the backend, and whenever I
 				// was able to do so, I couldn't get the page to update properly. All I was doing was
 				// setting a simple boolean on 'this' (the factory), like so:
@@ -146,7 +146,6 @@
 
 		// 2. Immediately fetch from server to update page with persisted data
 		JsonFactory.load().then(jsonResult => {
-			$log.info('setting results from server fetch... length = ' + JSON.stringify(jsonResult).length);
 			this.groups = jsonResult;
 			$scope.$apply(() => {
 				this.groups = jsonResult;
