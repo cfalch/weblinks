@@ -57,9 +57,10 @@
 	app.factory('JsonFactory', ["$window", "$http", "$log", function ($window, $http, $log) {
 		var AWS_ENDPT = 'https://7fhx9eq7g5.execute-api.us-east-1.amazonaws.com/default';
 		var AWS_APIKEY = 'eNj8evospb6YHRJhpwvpe540LrGhPtdT5HwslpOw';
+		var secretPublicId = parseSpid($window);
 		function localStg() {
 			$log.info('JsonFactory :: loading from local storage');
-			jsonData = loadJsonLocal();
+			jsonData = loadJsonLocal(secretPublicId);
 			jsonFrom = LOCAL_STG;
 			return jsonData;
 		};
@@ -79,7 +80,6 @@
 				//  });
 				// There were no errors in the console, and it loaded the results from localStorage fine, but
 				// it wouldn't update with the server data when this checking was in place.
-				var secretPublicId = parseSpid($window);
 				var config = {
 					headers: { 'x-api-key': AWS_APIKEY },
 					params: { 'SecretPublicID': secretPublicId }
@@ -88,7 +88,7 @@
 					.success(function (data) {
 						jsonData = data;
 						jsonFrom = DISK;
-						saveJsonLocal(jsonData);
+						saveJsonLocal(secretPublicId, jsonData);
 						resolve(jsonData);
 					});
 			});
@@ -104,7 +104,7 @@
 				$http.put(AWS_ENDPT + '/putWeblinks', updatedJson, config)
 					.success(function (response) {
 						jsonData = updatedJson;
-						saveJsonLocal(updatedJson);
+						saveJsonLocal(secretPublicId, updatedJson);
 						resolve();
 					}).error(function (data) {
 						$log.error('DID NOT SAVE!');
@@ -287,10 +287,10 @@
 		};
 	});
 
-	var loadJsonLocal = function () {
+	var loadJsonLocal = function (spid) {
 		var weblinksJson = [];
 		if (typeof (Storage) !== "undefined") {
-			var data = window.localStorage.getItem("weblinks-json");
+			var data = window.localStorage.getItem(spid);
 			if (data) {
 				weblinksJson = angular.fromJson(data);
 			}
@@ -298,9 +298,9 @@
 		return weblinksJson;
 	};
 
-	var saveJsonLocal = function (jsonToWrite) {
+	var saveJsonLocal = function (spid, jsonToWrite) {
 		if (typeof (Storage) !== "undefined") {
-			window.localStorage.setItem("weblinks-json", angular.toJson(jsonToWrite, true)); // pretty-print
+			window.localStorage.setItem(spid, angular.toJson(jsonToWrite, true)); // pretty-print
 		} else {
 			alert("Could not write to local storage!");
 		}
