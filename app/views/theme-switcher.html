@@ -1,5 +1,5 @@
-<div class="theme-ctrl">
-  <a ng-click="themeCtrl.set('clean')">Clean</a> | 
-  <a ng-click="themeCtrl.set('dark')">Dark</a> | 
+<div class="theme-ctrl" ng-show="searchCtrl.queryStr.data.length === 0" ng-controller="SearchController as searchCtrl">
+  <a ng-click="themeCtrl.set('clean')">Clean</a> |
+  <a ng-click="themeCtrl.set('dark')">Dark</a> |
   <a ng-click="themeCtrl.set('bluish')">Bluish</a>
 </div>
