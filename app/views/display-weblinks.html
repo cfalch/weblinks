@@ -29,7 +29,7 @@
             <ul>
                 <li class="aWeblink"
                     ng-repeat="link in linkGroup.links | orderBy:'title' | linkFilter:linkCtrl.queryStr.data as searchResults">
-                    <a href="{{link.url}}">{{link.title}}</a>
+                    <a href="{{link.url}}" tabindex="0">{{link.title}}</a>
                     <span class="comment" ng-show="{{link.comment.length > 0}}">&mdash; {{link.comment}}</span>
                 </li>
             </ul>

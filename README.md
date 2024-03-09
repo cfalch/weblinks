@@ -58,3 +58,5 @@ All API endpoints use the same Gateway instance and the same Execution Role, so 
 | scanWeblinks | NONE | NONE
 | putWeblinks | SecretPublicID=%s | Object[] - list of: {groupName: "", links: []}
 
+
+March 2024: I "disabled" scanWeblinks by changing its concurrency to 0. I don't believe it's in-use by the Angular app, but didn't look for sure. To re-enable, go into AWS lambda console, Configuration tab, Concurrency section and change it from `Reserve Concurrency 0` to `Use unreserved account concurrency`.
